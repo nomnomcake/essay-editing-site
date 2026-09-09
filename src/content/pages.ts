@@ -24,6 +24,17 @@ export const pages = {
       essays: "essays",
     },
     faqPreview: { heading: "questions", seeAll: "see all questions", anchor: "faq" },
+    search: { label: "search the questions", placeholder: "search the questions" },
+  },
+
+  desktop: {
+    rail: "desktop",
+    docs: { samples: "samples.doc", terms: "terms.txt" },
+    mail: "email",
+    globe: "book a call",
+    star: "start intake",
+    footerTitle: "readme.txt",
+    urlPrefix: "https://essay-edits/",
   },
 
   services: {

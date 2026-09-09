@@ -18,3 +18,4 @@ export { Button, buttonClassName } from "./Button";
 export type { ButtonProps } from "./Button";
 export { Field } from "./Field";
 export type { FieldProps, FieldOption } from "./Field";
+export { FolderIcon, GlobeIcon, StarIcon, EnvelopeIcon, CloseBadge } from "./Icons";

@@ -12,6 +12,8 @@ import {
 } from "@/components";
 import { SectionHeading } from "@/components/site/Page";
 import { JsonLd, serviceSchema } from "@/components/site/JsonLd";
+import { DesktopRail } from "@/components/site/DesktopRail";
+import { HomeSearch } from "./HomeSearch";
 import {
   credentials,
   faq,
@@ -35,8 +37,9 @@ export default function HomePage() {
   const faqAnchor = `#${c.faqPreview.anchor}`;
 
   return (
-    <div className="mx-auto flex max-w-6xl flex-col gap-16 px-4 py-8 md:py-12">
+    <div className="mx-auto flex max-w-7xl gap-8 px-4 py-6 md:py-10">
       <JsonLd data={serviceSchema()} />
+      <div className="flex min-w-0 flex-1 flex-col gap-14">
       {/* Hero */}
       <RetroWindow title={c.window.title} url={c.window.url} variant="browser" fill="coral" flush>
         <div className="relative h-44 overflow-hidden border-b-[2.5px] border-ink md:h-64">
@@ -57,6 +60,8 @@ export default function HomePage() {
           <DialogBox prompt={c.dialog.prompt} yesHref={site.cta.href} noHref={faqAnchor} />
         </div>
       </RetroWindow>
+
+      <HomeSearch />
 
       {/* Credentials strip */}
       <section className="flex flex-col gap-4">
@@ -153,6 +158,8 @@ export default function HomePage() {
           </ul>
         </RetroWindow>
       </section>
+      </div>
+      <DesktopRail />
     </div>
   );
 }

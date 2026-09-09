@@ -22,7 +22,7 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
         <Link
           href="/"
-          className="focus-retro inline-flex items-center gap-2 r-tight font-pixel text-sm"
+          className="focus-retro inline-flex items-center gap-2 outline-ink r-tight bg-peach-bg px-3 py-1 font-pixel text-sm"
         >
           <Sparkle tone="gold" size={18} />
           <span>{site.shortName}</span>

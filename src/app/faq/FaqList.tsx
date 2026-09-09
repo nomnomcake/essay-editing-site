@@ -17,6 +17,8 @@ export function FaqList({ questions }: { questions: Question[] }) {
   const [openId, setOpenId] = useState<string>("");
 
   useEffect(() => {
+    const q = new URLSearchParams(window.location.search).get("q");
+    if (q) setQuery(q);
     const sync = () => {
       const id = readHash();
       if (id) {
