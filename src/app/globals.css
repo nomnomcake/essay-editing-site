@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens
+   Contrast rule: body text is only ever --ink on --cream or --ink on --peach-bg.
+   Never coral or periwinkle text on peach.
+   --------------------------------------------------------------------------- */
+:root {
+  --peach-bg: #fbe3d8; /* page background */
+  --cream: #fff9f4; /* card fill */
+  --ink: #5a3a34; /* every outline, every piece of body text */
+  --coral: #e89a94; /* primary accent, sky, CTA fill */
+  --coral-deep: #d97b77; /* hover */
+  --periwinkle: #b9c6e8; /* secondary buttons, icon fills */
+  --gold: #f2c879; /* stars, sun, highlights */
+
+  --outline-width: 2.5px;
+  --radius-soft: 12px;
+  --radius-tight: 8px;
+}
+
+/* Register tokens with Tailwind so bg-cream, border-ink, text-coral etc. work. */
+@theme inline {
+  --color-peach-bg: var(--peach-bg);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-coral: var(--coral);
+  --color-coral-deep: var(--coral-deep);
+  --color-periwinkle: var(--periwinkle);
+  --color-gold: var(--gold);
+
+  --font-pixel: var(--font-pixel), "Courier New", monospace;
+  --font-body: var(--font-body), system-ui, sans-serif;
+
+  --radius-soft: var(--radius-soft);
+  --radius-tight: var(--radius-tight);
+}
+
+/* ---------------------------------------------------------------------------
+   Reusable utilities
+   --------------------------------------------------------------------------- */
+@utility outline-ink {
+  border: var(--outline-width) solid var(--ink);
+}
+
+@utility r-soft {
+  border-radius: var(--radius-soft);
+}
+
+@utility r-tight {
+  border-radius: var(--radius-tight);
+}
+
+@utility shadow-flat {
+  box-shadow: 3px 3px 0 var(--ink);
+  transition:
+    box-shadow 120ms ease,
+    transform 120ms ease;
+
+  &:active {
+    box-shadow: 0 0 0 var(--ink);
+    transform: translate(3px, 3px);
+  }
+}
+
+@utility focus-retro {
+  &:focus-visible {
+    outline: 2px dashed var(--ink);
+    outline-offset: 2px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   --------------------------------------------------------------------------- */
+@layer base {
+  html {
+    color-scheme: light only;
+  }
+
+  body {
+    background: var(--peach-bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Real controls get real focus rings. */
+  :focus-visible {
+    outline: 2px dashed var(--ink);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
