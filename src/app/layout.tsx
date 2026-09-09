@@ -11,8 +11,6 @@ const pixel = Silkscreen({
   weight: ["400", "700"],
   subsets: ["latin"],
   display: "swap",
-  adjustFontFallback: false,
-  fallback: ["Courier New", "monospace"],
 });
 
 const body = Nunito({

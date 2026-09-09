@@ -14,6 +14,9 @@ import {
 
 export const runtime = "nodejs";
 
+// TODO(v2): file upload. If drafts are ever accepted as files instead of Doc links, this route
+// would need multipart parsing and object storage. Nothing built; docLink stays a URL.
+
 const RATE_LIMIT = { limit: 5, windowMs: 60 * 60 * 1000 };
 
 type Reply =

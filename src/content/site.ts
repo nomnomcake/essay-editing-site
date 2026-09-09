@@ -25,6 +25,8 @@ export interface LegalDoc {
   sections: LegalSection[];
 }
 
+// TODO(v2): client portal. A signed-in area would add a nav item here and a /portal route. Nothing built.
+// TODO(v2): blog. Would add { href: "/blog", label: "blog" } to nav and a /content/posts folder. Nothing built.
 export const site = {
   name: "Essay editing",
   /** Used in the browser tab and OG images. Lowercase for the pixel font. */
@@ -39,7 +41,7 @@ export const site = {
     { href: "/about", label: "about" },
     { href: "/faq", label: "faq" },
   ] satisfies NavItem[],
-  cta: { href: "/start", label: "start" },
+  cta: { href: "/start", label: "start intake" },
   book: { href: "/book", label: "book a call" },
   footer: {
     links: [

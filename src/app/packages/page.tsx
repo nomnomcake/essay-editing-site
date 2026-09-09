@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Button, DottedFrame, FolderTab, Sparkle } from "@/components";
 import { Page, SectionHeading } from "@/components/site/Page";
+import { JsonLd, serviceSchema } from "@/components/site/JsonLd";
 import { packages, pages, RUSH_MULTIPLIER, site, ui } from "@/content";
 import type { FolderTone } from "@/components";
 
@@ -16,6 +17,7 @@ const tones: FolderTone[] = ["coral", "periwinkle", "gold", "periwinkle"];
 export default function PackagesPage() {
   return (
     <Page heading={c.heading} intro={c.intro} wide>
+      <JsonLd data={serviceSchema()} />
       <div className="grid gap-10 md:grid-cols-2">
         {packages.map((p, i) => (
           <div key={p.id} id={p.id} className="scroll-mt-24">

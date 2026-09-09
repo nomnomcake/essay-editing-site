@@ -80,7 +80,7 @@ export function FaqList({ questions }: { questions: Question[] }) {
                   {ui.glyph.plus}
                 </span>
                 <span className="flex-1">{item.question}</span>
-                <span className="hidden font-pixel text-[10px] opacity-60 sm:inline">{item.category}</span>
+                <span className="hidden font-pixel text-[10px] sm:inline">{item.category}</span>
               </summary>
               <div className="flex flex-col gap-3 border-t-[2.5px] border-ink px-4 py-4">
                 <p className="max-w-prose">{item.answer}</p>

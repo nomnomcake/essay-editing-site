@@ -45,7 +45,7 @@ export function Footer() {
         </ul>
       </div>
       <div className="mx-auto flex max-w-6xl items-end justify-between px-4 pb-4">
-        <p className="font-pixel text-[10px] opacity-70">
+        <p className="font-pixel text-[10px]">
           {ui.glyph.copyright} {year} {site.footer.copyright}
         </p>
         <Cloud size="sm" />

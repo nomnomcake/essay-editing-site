@@ -12,6 +12,7 @@ import {
   Sun,
 } from "@/components";
 import { SectionHeading } from "@/components/site/Page";
+import { JsonLd, serviceSchema } from "@/components/site/JsonLd";
 import {
   credentials,
   faq,
@@ -37,6 +38,7 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-16 px-4 py-8 md:py-12">
+      <JsonLd data={serviceSchema()} />
       {/* Hero */}
       <RetroWindow title={c.window.title} url={c.window.url} variant="browser" fill="coral" flush>
         <div className="relative h-44 overflow-hidden border-b-[2.5px] border-ink md:h-64">

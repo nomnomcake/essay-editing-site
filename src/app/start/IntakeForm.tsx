@@ -241,9 +241,9 @@ export function IntakeForm() {
             <DottedFrame key={row.id} padding="sm">
               <div className="flex flex-col gap-4 p-1">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-pixel text-xs">
+                  <h2 className="font-pixel text-xs">
                     {f.essay.heading} {i + 1}
-                  </h3>
+                  </h2>
                   {fields.length > 1 ? (
                     <Button variant="ghost" size="sm" onClick={() => remove(i)}>
                       {ui.form.removeRow}

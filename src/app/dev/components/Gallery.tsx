@@ -41,11 +41,11 @@ function Both({ children }: { children: ReactNode }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_375px]">
       <div className="@container min-w-0 outline-ink r-soft bg-peach-bg p-4">
-        <p className="mb-3 font-pixel text-[10px] opacity-70">{g.desktop}</p>
+        <p className="mb-3 font-pixel text-[10px]">{g.desktop}</p>
         {children}
       </div>
       <div className="w-[375px] max-w-full justify-self-start overflow-hidden outline-ink r-soft bg-peach-bg p-4">
-        <p className="mb-3 font-pixel text-[10px] opacity-70">{g.mobile}</p>
+        <p className="mb-3 font-pixel text-[10px]">{g.mobile}</p>
         <div className="@container">{children}</div>
       </div>
     </div>

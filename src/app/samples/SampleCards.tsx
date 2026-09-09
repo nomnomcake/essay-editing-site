@@ -6,6 +6,7 @@ import { pages, ui, type Sample } from "@/content";
 
 const c = pages.samples;
 
+// TODO(v2): in-browser editor. Samples are static excerpts by design; a live editor would replace this component.
 /** Grid of document icons that expand into a before/after view. One open at a time. */
 export function SampleCards({ samples }: { samples: Sample[] }) {
   const [openId, setOpenId] = useState<string | null>(null);
@@ -28,7 +29,7 @@ export function SampleCards({ samples }: { samples: Sample[] }) {
                 className={`focus-retro flex flex-col items-center gap-1 r-soft p-3 transition-colors motion-reduce:transition-none hover:bg-cream ${isOpen ? "bg-cream outline-ink" : ""}`}
               >
                 <DocIcon label={s.school.toLowerCase()} size="lg" tone={isOpen ? "periwinkle" : "cream"} />
-                <span className="font-pixel text-[10px] opacity-70">
+                <span className="font-pixel text-[10px]">
                   {s.wordLimit} {c.wordLimit}
                 </span>
                 {s.placeholder ? (

@@ -82,7 +82,7 @@ export const Field = forwardRef<
     <span className="flex items-baseline gap-2 font-pixel text-xs">
       <span>{label}</span>
       {!required ? (
-        <span className="text-[10px] opacity-70">{ui.field.optional}</span>
+        <span className="text-[10px]">{ui.field.optional}</span>
       ) : null}
     </span>
   );
