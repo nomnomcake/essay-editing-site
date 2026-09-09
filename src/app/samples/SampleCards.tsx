@@ -9,7 +9,7 @@ const c = pages.samples;
 // TODO(v2): in-browser editor. Samples are static excerpts by design; a live editor would replace this component.
 /** Grid of document icons that expand into a before/after view. One open at a time. */
 export function SampleCards({ samples }: { samples: Sample[] }) {
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>(samples[0]?.id ?? null);
   const baseId = useId();
   const open = samples.find((s) => s.id === openId) ?? null;
 
