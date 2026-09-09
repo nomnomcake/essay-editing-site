@@ -47,13 +47,12 @@ hardcoded in components.
 | `process.ts` | the how-it-works steps |
 | `credentials.ts` | the bio bullets |
 | `samples.ts` | before/after excerpts and change notes |
-| `testimonials.ts` | quotes and ratings |
 | `site.ts` | nav, footer, contact email, socials, terms, privacy |
 | `pages.ts` | headings, intros, labels and metadata per page |
 | `ui.ts` | tiny shared microcopy: button labels, glyphs, aria text |
 
 Search the folder for `TODO` and `PLACEHOLDER` to find every value that still
-needs a real number, quote or link. Samples and testimonials have a
+needs a real number, quote or link. Samples have a
 `placeholder` flag; set it to `false` once the real text is in and the yellow
 tag disappears.
 

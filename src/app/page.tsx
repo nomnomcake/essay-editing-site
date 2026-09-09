@@ -6,7 +6,6 @@ import {
   DialogBox,
   DottedFrame,
   FolderTab,
-  HeartRow,
   RetroWindow,
   Sparkle,
   Sun,
@@ -20,7 +19,6 @@ import {
   pages,
   process,
   site,
-  testimonials,
 } from "@/content";
 import type { FolderTone } from "@/components";
 
@@ -133,29 +131,6 @@ export default function HomePage() {
             </FolderTab>
           ))}
         </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="flex flex-col gap-4">
-        <SectionHeading>{c.testimonials.heading}</SectionHeading>
-        <ul className="grid gap-8 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <li key={t.id} className="flex flex-col gap-4">
-              <HeartRow filled={t.rating} />
-              <figure className="flex flex-col gap-2 outline-ink r-soft bg-cream p-4">
-                <blockquote>{t.quote}</blockquote>
-                <figcaption className="font-pixel text-[11px]">
-                  {t.attribution}
-                  {t.placeholder ? (
-                    <span className="ml-2 r-tight bg-gold px-1.5 py-0.5 text-[9px] uppercase">
-                      {c.testimonials.placeholderTag}
-                    </span>
-                  ) : null}
-                </figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
       </section>
 
       {/* FAQ preview */}

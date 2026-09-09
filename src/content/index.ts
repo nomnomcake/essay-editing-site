@@ -3,7 +3,6 @@ export * from "./faq";
 export * from "./process";
 export * from "./credentials";
 export * from "./samples";
-export * from "./testimonials";
 export * from "./site";
 export * from "./pages";
 export * from "./ui";

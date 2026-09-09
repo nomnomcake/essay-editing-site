@@ -1,6 +1,6 @@
 /**
  * Page-level copy: headings, subcopy, labels. Data lists live in their own
- * files (packages, faq, process, samples, testimonials, credentials, site).
+ * files (packages, faq, process, samples, credentials, site).
  */
 export const pages = {
   home: {
@@ -23,7 +23,6 @@ export const pages = {
       rounds: "rounds",
       essays: "essays",
     },
-    testimonials: { heading: "from students", placeholderTag: "placeholder" },
     faqPreview: { heading: "questions", seeAll: "see all questions", anchor: "faq" },
   },
 
