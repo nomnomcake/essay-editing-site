@@ -53,10 +53,10 @@ export function RetroWindow({
       >
         <span className="inline-flex items-center gap-2 border-b-0 outline-ink r-tight rounded-b-none bg-peach-bg px-2 py-0.5">
           <span>{title}</span>
-          <span className="text-[10px]">×</span>
+          <span className="text-[10px]">{ui.glyph.close}</span>
         </span>
         <span className="ml-auto inline-flex size-5 items-center justify-center outline-ink r-tight bg-cream text-[10px] leading-none">
-          ×
+          {ui.glyph.close}
         </span>
       </div>
 

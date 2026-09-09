@@ -33,6 +33,12 @@ export const ui = {
     optional: "optional",
     required: "required",
   },
+  glyph: {
+    close: "×",
+    plus: "+",
+    dot: "·",
+    copyright: "©",
+  },
   button: {
     loading: "one moment",
   },

@@ -20,6 +20,8 @@ export interface LegalDoc {
   description: string;
   /** ISO date. */
   updated: string;
+  /** Fake filename in the window title bar. */
+  fileName: string;
   sections: LegalSection[];
 }
 
@@ -57,6 +59,7 @@ export const site = {
 
 export const terms: LegalDoc = {
   title: "Terms",
+  fileName: "terms.txt",
   description: "What you are buying, what you are not, and who is responsible for what.",
   updated: "2026-09-09",
   sections: [
@@ -118,6 +121,7 @@ export const terms: LegalDoc = {
 
 export const privacy: LegalDoc = {
   title: "Privacy",
+  fileName: "privacy.txt",
   description: "What I collect through the intake form, what I do with it, and how to have it deleted.",
   updated: "2026-09-09",
   sections: [

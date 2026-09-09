@@ -1,0 +1,39 @@
+import type { ReactNode } from "react";
+import { Sparkle } from "@/components/Decorations";
+
+/** Shared page container: max width, padding, optional heading with intro. */
+export function Page({
+  heading,
+  intro,
+  children,
+  wide = false,
+}: {
+  heading?: string;
+  intro?: string;
+  wide?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <div className={`mx-auto flex flex-col gap-10 px-4 py-8 md:py-12 ${wide ? "max-w-6xl" : "max-w-4xl"}`}>
+      {heading ? (
+        <div className="flex flex-col gap-3">
+          <h1 className="flex items-center gap-3 font-pixel text-xl md:text-2xl">
+            <Sparkle tone="gold" size={20} />
+            <span>{heading}</span>
+          </h1>
+          {intro ? <p className="max-w-prose text-lg">{intro}</p> : null}
+        </div>
+      ) : null}
+      {children}
+    </div>
+  );
+}
+
+/** Section heading used inside pages. */
+export function SectionHeading({ children, id }: { children: ReactNode; id?: string }) {
+  return (
+    <h2 id={id} className="font-pixel text-base md:text-lg">
+      {children}
+    </h2>
+  );
+}
