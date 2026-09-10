@@ -13,6 +13,7 @@ import {
 import { SectionHeading } from "@/components/site/Page";
 import { JsonLd, serviceSchema } from "@/components/site/JsonLd";
 import { DesktopRail } from "@/components/site/DesktopRail";
+import { SiteTabs } from "@/components/site/SiteTabs";
 import { HomeSearch } from "./HomeSearch";
 import {
   credentials,
@@ -41,7 +42,7 @@ export default function HomePage() {
       <JsonLd data={serviceSchema()} />
       <div className="flex min-w-0 flex-1 flex-col gap-14">
       {/* Hero */}
-      <RetroWindow title={c.window.title} url={c.window.url} variant="browser" fill="coral" flush>
+      <RetroWindow title={c.window.title} url={c.window.url} variant="browser" fill="coral" flush tabs={<SiteTabs />}>
         <div className="relative h-44 overflow-hidden border-b-[2.5px] border-ink md:h-64">
           <Sun size={40} className="absolute top-6 left-8 md:left-16" />
           <Cloud size="lg" className="absolute top-4 right-6 md:right-24" animated />

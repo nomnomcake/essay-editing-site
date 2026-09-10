@@ -13,6 +13,8 @@ export interface RetroWindowProps {
   /** Remove body padding, e.g. for a full-bleed sky panel. */
   flush?: boolean;
   className?: string;
+  /** Real navigation tabs rendered in the title bar instead of the static title. Not aria-hidden. */
+  tabs?: ReactNode;
   children: ReactNode;
 }
 
@@ -38,6 +40,7 @@ export function RetroWindow({
   fill = "cream",
   flush = false,
   className = "",
+  tabs,
   children,
 }: RetroWindowProps) {
   const isBrowser = variant === "browser";
@@ -46,16 +49,22 @@ export function RetroWindow({
     <section
       className={`outline-ink r-soft overflow-hidden bg-cream text-ink ${className}`}
     >
-      {/* Title bar. Whole bar is decorative chrome. */}
+      {/* Title bar. Decorative chrome unless real tabs are passed in. */}
       <div
-        aria-hidden="true"
-        className="flex items-center gap-2 border-b-[2.5px] border-ink bg-cream px-3 py-2 font-pixel text-xs"
+        className="flex items-end gap-2 border-b-[2.5px] border-ink bg-cream px-3 pt-2 font-pixel text-xs"
       >
-        <span className="inline-flex items-center gap-2 border-b-0 outline-ink r-tight rounded-b-none bg-peach-bg px-2 py-0.5">
-          <span>{title}</span>
-          <span className="text-[10px]">{ui.glyph.close}</span>
-        </span>
-        <span className="ml-auto inline-flex size-5 items-center justify-center outline-ink r-tight bg-cream text-[10px] leading-none">
+        {tabs ? (
+          tabs
+        ) : (
+          <span
+            aria-hidden="true"
+            className="-mb-[2.5px] inline-flex items-center gap-2 border-b-0 outline-ink r-tight rounded-b-none bg-peach-bg px-2 py-1.5"
+          >
+            <span>{title}</span>
+            <span className="text-[10px]">{ui.glyph.close}</span>
+          </span>
+        )}
+        <span aria-hidden="true" className="mb-2 ml-auto inline-flex size-5 items-center justify-center outline-ink r-tight bg-cream text-[10px] leading-none">
           {ui.glyph.close}
         </span>
       </div>

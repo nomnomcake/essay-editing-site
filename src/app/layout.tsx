@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito, Silkscreen } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { pages, site } from "@/content";
 import "./globals.css";
@@ -53,7 +52,6 @@ export default function RootLayout({
         >
           {pages.layout.skipLink}
         </a>
-        <Header />
         <main id={MAIN_ID} className="flex-1">
           {children}
         </main>

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { RetroWindow } from "@/components/RetroWindow";
 import { pages } from "@/content";
 import { DesktopRail } from "./DesktopRail";
+import { SiteTabs } from "./SiteTabs";
 
 /**
  * Every page is a browser window on the desktop, with the icon rail beside it.
@@ -26,6 +27,7 @@ export function Page({
           title={heading ?? pages.desktop.rail}
           variant="browser"
           url={`${pages.desktop.urlPrefix}${slug}`}
+          tabs={<SiteTabs />}
         >
           <div className="flex flex-col gap-10">
             {heading ? (
