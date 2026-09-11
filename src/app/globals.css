@@ -112,11 +112,7 @@
   }
 
   body {
-    background-color: var(--peach-bg);
-    background-image:
-      linear-gradient(to right, rgb(90 58 52 / 0.07) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(90 58 52 / 0.07) 1px, transparent 1px);
-    background-size: 28px 28px;
+    background: var(--peach-bg);
     color: var(--ink);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;

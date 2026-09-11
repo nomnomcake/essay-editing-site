@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Nunito, Silkscreen } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/site/Footer";
+import { Shell } from "@/components/site/Shell";
 import { pages, site } from "@/content";
 import "./globals.css";
 
@@ -45,17 +46,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${pixel.variable} ${body.variable}`}>
-      <body className="flex min-h-dvh flex-col bg-peach-bg font-body text-ink">
+      <body className="overflow-hidden bg-peach-bg font-body text-ink">
         <a
           href={`#${MAIN_ID}`}
           className="focus-retro sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-cream focus:px-3 focus:py-2 outline-ink r-tight"
         >
           {pages.layout.skipLink}
         </a>
-        <main id={MAIN_ID} className="flex-1">
+        <Shell>
           {children}
-        </main>
-        <Footer />
+          <Footer />
+        </Shell>
         <Analytics />
       </body>
     </html>
