@@ -37,12 +37,11 @@ export default function HomePage() {
   const faqAnchor = `#${c.faqPreview.anchor}`;
 
   return (
-    <div className="mx-auto flex max-w-7xl gap-8 px-4 py-6 md:py-10">
+    <>
       <JsonLd data={serviceSchema()} />
-      <div className="flex min-w-0 flex-1 flex-col gap-14">
-      {/* Hero */}
-      <RetroWindow title={c.window.title} url={c.window.url} variant="browser" fill="coral" flush>
-        <div className="relative h-44 overflow-hidden border-b-[2.5px] border-ink md:h-64">
+      {/* Sky: the actual top of the page */}
+      <section className="border-b-[2.5px] border-ink bg-coral">
+        <div className="relative h-52 overflow-hidden md:h-72">
           <Sun size={40} className="absolute top-6 left-8 md:left-16" />
           <Cloud size="lg" className="absolute top-4 right-6 md:right-24" animated />
           <Cloud size="md" className="absolute bottom-4 left-1/3 md:left-1/4" />
@@ -52,14 +51,17 @@ export default function HomePage() {
           <Sparkle tone="cream" size={12} className="absolute top-20 right-1/4" />
           <Sparkle tone="cream" size={14} className="hidden md:block absolute bottom-10 left-16" animated />
         </div>
-        <div className="grid gap-6 bg-cream p-5 md:grid-cols-[1fr_auto] md:items-center md:p-8">
-          <div className="flex flex-col gap-3">
-            <h1 className="text-3xl font-bold leading-tight md:text-4xl">{c.headline}</h1>
-            <p className="max-w-prose text-lg">{c.subcopy}</p>
-          </div>
-          <DialogBox prompt={c.dialog.prompt} yesHref={site.cta.href} noHref={faqAnchor} />
+      </section>
+
+      <div className="mx-auto flex max-w-7xl gap-8 px-4 py-8 md:py-12">
+        <div className="flex min-w-0 flex-1 flex-col gap-14">
+      <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+        <div className="flex flex-col gap-3">
+          <h1 className="text-3xl font-bold leading-tight md:text-5xl">{c.headline}</h1>
+          <p className="max-w-prose text-lg">{c.subcopy}</p>
         </div>
-      </RetroWindow>
+        <DialogBox prompt={c.dialog.prompt} yesHref={site.cta.href} noHref={faqAnchor} />
+      </div>
 
       <HomeSearch />
 
@@ -158,8 +160,9 @@ export default function HomePage() {
           </ul>
         </RetroWindow>
       </section>
+        </div>
+        <DesktopRail />
       </div>
-      <DesktopRail />
-    </div>
+    </>
   );
 }

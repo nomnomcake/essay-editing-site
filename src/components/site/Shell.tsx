@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { pages, site, ui } from "@/content";
+import { pages, ui } from "@/content";
 import { SiteTabs } from "./SiteTabs";
 
 const MAIN_ID = "main";
@@ -12,31 +12,28 @@ function Glyph({ children }: { children: ReactNode }) {
 }
 
 /**
- * The full-screen browser window. Title bar on top, scrolling page in the middle,
- * navigation tabs fixed along the bottom.
+ * The site is one full-screen browser window. Tabs in the title bar switch
+ * pages, the address bar reflects the page, and the page scrolls below.
  */
 export function Shell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const current =
-    pathname === "/"
-      ? site.shortName
-      : [...site.nav, site.cta, site.book].find((n) => n.href === pathname)?.label ??
-        pathname.replace(/^\//, "");
-  const url = `${pages.desktop.urlPrefix}${pathname === "/" ? "" : pathname.replace(/^\//, "")}`;
+  const url = `${pages.desktop.urlPrefix}${pathname.replace(/^\//, "")}`;
 
   return (
     <div className="flex h-dvh flex-col p-2 md:p-3">
       <div className="flex min-h-0 flex-1 flex-col overflow-hidden outline-ink r-soft bg-cream text-ink">
-        {/* Top chrome: decorative title and address bar */}
-        <div aria-hidden="true" className="flex items-end gap-2 border-b-[2.5px] border-ink bg-cream px-3 pt-2 font-pixel text-xs">
-          <span className="-mb-[2.5px] inline-flex items-center gap-2 border-b-0 outline-ink r-tight rounded-b-none bg-peach-bg px-3 py-1.5">
-            <span>{current}</span>
-            <span className="text-[10px]">{ui.glyph.close}</span>
-          </span>
-          <span className="mb-2 ml-auto inline-flex size-5 items-center justify-center outline-ink r-tight bg-cream text-[10px] leading-none">
+        {/* Title bar with the real navigation tabs */}
+        <div className="flex items-end gap-2 border-b-[2.5px] border-ink bg-cream px-3 pt-2">
+          <SiteTabs />
+          <span
+            aria-hidden="true"
+            className="mb-2 inline-flex size-5 shrink-0 items-center justify-center outline-ink r-tight bg-cream font-pixel text-[10px] leading-none"
+          >
             {ui.glyph.close}
           </span>
         </div>
+
+        {/* Address bar, decorative */}
         <div aria-hidden="true" className="hidden items-center gap-2 border-b-[2.5px] border-ink bg-cream px-3 py-2 md:flex">
           <Glyph>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -67,21 +64,14 @@ export function Shell({ children }: { children: ReactNode }) {
           </Glyph>
         </div>
 
-        {/* Scrolling page */}
+        {/* The page */}
         <main
           id={MAIN_ID}
           className="min-h-0 flex-1 overflow-y-auto bg-peach-bg [background-image:linear-gradient(to_right,rgb(90_58_52/0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgb(90_58_52/0.07)_1px,transparent_1px)] [background-size:28px_28px]"
         >
           {children}
         </main>
-
-        {/* Bottom tab bar */}
-        <div className="flex items-start gap-2 border-t-[2.5px] border-ink bg-cream px-3 pb-2">
-          <SiteTabs />
-        </div>
       </div>
     </div>
   );
 }
-
-export const SHELL_MAIN_ID = MAIN_ID;

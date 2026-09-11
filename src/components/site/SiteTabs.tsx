@@ -6,9 +6,9 @@ import { Sparkle } from "@/components/Decorations";
 import { pages, site } from "@/content";
 
 const tab =
-  "focus-retro -mt-[2.5px] inline-flex shrink-0 items-center gap-2 border-t-0 outline-ink r-tight rounded-t-none px-3 py-2 font-pixel text-xs whitespace-nowrap";
+  "focus-retro -mb-[2.5px] inline-flex shrink-0 items-center gap-2 border-b-0 outline-ink r-tight rounded-b-none px-3 py-2 font-pixel text-xs whitespace-nowrap";
 
-/** The site navigation, drawn as browser tabs hanging from the bottom bar of the full-screen window. */
+/** Site navigation as browser tabs in the window's title bar. Each tab opens a page. */
 export function SiteTabs() {
   const pathname = usePathname();
   const items = [{ href: "/", label: site.shortName }, ...site.nav];
@@ -16,7 +16,7 @@ export function SiteTabs() {
   return (
     <nav
       aria-label={pages.layout.menu}
-      className="flex min-w-0 flex-1 items-start gap-1 overflow-x-auto pr-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      className="flex min-w-0 flex-1 items-end gap-1 overflow-x-auto pr-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
     >
       {items.map((item, i) => {
         const active = pathname === item.href;

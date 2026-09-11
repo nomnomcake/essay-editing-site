@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { Sparkle } from "@/components/Decorations";
-import { DesktopRail } from "./DesktopRail";
 
 /** Page content area inside the full-screen window, with the desktop icon rail beside it. */
 export function Page({
@@ -15,8 +14,8 @@ export function Page({
   children: ReactNode;
 }) {
   return (
-    <div className={`mx-auto flex gap-8 px-4 py-6 md:py-10 ${wide ? "max-w-7xl" : "max-w-6xl"}`}>
-      <div className="flex min-w-0 flex-1 flex-col gap-10">
+    <div className={`mx-auto px-4 py-8 md:py-12 ${wide ? "max-w-6xl" : "max-w-4xl"}`}>
+      <div className="flex min-w-0 flex-col gap-10">
         {heading ? (
           <div className="flex flex-col gap-3">
             <h1 className="flex items-center gap-3 font-pixel text-xl md:text-2xl">
@@ -28,7 +27,6 @@ export function Page({
         ) : null}
         {children}
       </div>
-      <DesktopRail />
     </div>
   );
 }
