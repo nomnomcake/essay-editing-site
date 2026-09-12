@@ -95,12 +95,31 @@
   }
 }
 
+@keyframes drift {
+  from {
+    transform: translateX(-30vw);
+  }
+  to {
+    transform: translateX(110vw);
+  }
+}
+
 @utility animate-float {
   animation: float 6s ease-in-out infinite;
 }
 
+@utility animate-float-slow {
+  animation: float 9s ease-in-out infinite;
+}
+
+@utility animate-drift {
+  animation: drift 80s linear infinite;
+}
+
 @utility animate-twinkle {
   animation: twinkle 2.4s ease-in-out infinite;
+  &:nth-child(2n) { animation-delay: -0.8s; }
+  &:nth-child(3n) { animation-delay: -1.6s; }
 }
 
 /* ---------------------------------------------------------------------------
