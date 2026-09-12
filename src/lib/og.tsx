@@ -8,7 +8,7 @@ const palette = {
   peach: "#fbe3d8",
   cream: "#fff9f4",
   ink: "#5a3a34",
-  coral: "#e89a94",
+  accent: "#e89a94",
   gold: "#f2c879",
 };
 
@@ -101,7 +101,7 @@ export function ogImage(title: string, subtitle?: string) {
             </div>
           </div>
           <div style={{ display: "flex", flex: 1 }}>
-            <div style={{ position: "relative", width: 380, background: palette.coral, borderRight: `6px solid ${palette.ink}`, display: "flex" }}>
+            <div style={{ position: "relative", width: 380, background: palette.accent, borderRight: `6px solid ${palette.ink}`, display: "flex" }}>
               <div style={{ position: "absolute", left: 40, top: 40, width: 60, height: 60, borderRadius: 9999, background: palette.gold, border: `5px solid ${palette.ink}` }} />
               <Cloud x={150} y={110} />
               <Cloud x={20} y={250} scale={0.7} />

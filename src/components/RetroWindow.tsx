@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ui } from "@/content/ui";
+import { WindowDots } from "./Icons";
 
 export interface RetroWindowProps {
   /** Lowercase title shown in the title bar. */
@@ -9,7 +10,7 @@ export interface RetroWindowProps {
   /** Text shown inside the fake URL pill. Decorative. */
   url?: string;
   /** Fill colour of the window body. */
-  fill?: "cream" | "coral" | "peach";
+  fill?: "cream" | "accent" | "peach";
   /** Remove body padding, e.g. for a full-bleed sky panel. */
   flush?: boolean;
   className?: string;
@@ -20,7 +21,7 @@ export interface RetroWindowProps {
 
 const fills: Record<NonNullable<RetroWindowProps["fill"]>, string> = {
   cream: "bg-cream",
-  coral: "bg-coral",
+  accent: "bg-accent",
   peach: "bg-peach-bg",
 };
 
@@ -51,28 +52,29 @@ export function RetroWindow({
     >
       {/* Title bar. Decorative chrome unless real tabs are passed in. */}
       <div
-        className="flex items-end gap-2 border-b-[2.5px] border-ink bg-cream px-3 pt-2 font-pixel text-xs"
+        className="flex items-end gap-2 border-b-[3px] border-ink bg-cream px-3 pt-2 font-pixel text-xs"
       >
         {tabs ? (
           tabs
         ) : (
           <span
             aria-hidden="true"
-            className="-mb-[2.5px] inline-flex items-center gap-2 border-b-0 outline-ink r-tight rounded-b-none bg-peach-bg px-2 py-1.5"
+            className="-mb-[3px] inline-flex items-center gap-2 border-b-0 outline-ink r-tight rounded-b-none bg-peach-bg px-2 py-1.5"
           >
             <span>{title}</span>
             <span className="text-[10px]">{ui.glyph.close}</span>
           </span>
         )}
-        <span aria-hidden="true" className="mb-2 ml-auto inline-flex size-5 items-center justify-center outline-ink r-tight bg-cream text-[10px] leading-none">
-          {ui.glyph.close}
+        <span aria-hidden="true" className="mb-1.5 ml-auto flex flex-1 items-center gap-3 self-center">
+          <span className="stripes-ink h-2.5 min-w-6 flex-1 opacity-45" />
+          <WindowDots />
         </span>
       </div>
 
       {isBrowser ? (
         <div
           aria-hidden="true"
-          className="hidden items-center gap-2 border-b-[2.5px] border-ink bg-cream px-3 py-2 md:flex"
+          className="hidden items-center gap-2 border-b-[3px] border-ink bg-cream px-3 py-2 md:flex"
         >
           <Glyph>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

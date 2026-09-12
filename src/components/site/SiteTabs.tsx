@@ -6,7 +6,7 @@ import { Sparkle } from "@/components/Decorations";
 import { pages, site } from "@/content";
 
 const tab =
-  "focus-retro -mb-[2.5px] inline-flex shrink-0 items-center gap-2 border-b-0 outline-ink r-tight rounded-b-none px-3 py-2 font-pixel text-xs whitespace-nowrap";
+  "focus-retro -mb-[3px] inline-flex shrink-0 items-center gap-2 border-b-0 outline-ink r-tight rounded-b-none px-3 py-2 font-pixel text-xs whitespace-nowrap";
 
 /** Site navigation as browser tabs in the window's title bar. Each tab opens a page. */
 export function SiteTabs() {
@@ -35,7 +35,7 @@ export function SiteTabs() {
       <Link
         href={site.cta.href}
         aria-current={pathname === site.cta.href ? "page" : undefined}
-        className={`${tab} ml-auto bg-coral hover:bg-coral-deep`}
+        className={`${tab} ml-auto bg-accent hover:bg-accent-deep`}
       >
         {site.cta.label}
       </Link>

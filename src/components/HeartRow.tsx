@@ -30,7 +30,7 @@ export function HeartRow({ filled, className = "" }: HeartRowProps) {
         >
           <path
             d="M9 15 2.2 8.6C.4 6.9.6 4 2.7 2.7A4 4 0 0 1 9 4.1a4 4 0 0 1 6.3-1.4c2.1 1.3 2.3 4.2.5 5.9L9 15Z"
-            fill={i < n ? "var(--coral)" : "var(--cream)"}
+            fill={i < n ? "var(--accent)" : "var(--cream)"}
             stroke="var(--ink)"
             strokeWidth="2"
             strokeLinejoin="round"

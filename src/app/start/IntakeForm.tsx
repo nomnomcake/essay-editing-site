@@ -233,7 +233,7 @@ export function IntakeForm() {
       <RetroWindow title={c.sections.essays} variant="plain">
         <div className="flex flex-col gap-6">
           {errors.essays?.root?.message || (typeof errors.essays?.message === "string" ? errors.essays.message : "") ? (
-            <p role="alert" className="font-pixel text-[11px] text-coral-deep">
+            <p role="alert" className="font-pixel text-[11px] text-accent-deep">
               {errors.essays?.root?.message ?? errors.essays?.message}
             </p>
           ) : null}
@@ -337,7 +337,7 @@ export function IntakeForm() {
       </RetroWindow>
 
       {formError ? (
-        <p role="alert" className="outline-ink r-tight bg-cream px-3 py-2 font-pixel text-[11px] text-coral-deep">
+        <p role="alert" className="outline-ink r-tight bg-cream px-3 py-2 font-pixel text-[11px] text-accent-deep">
           {formError}
         </p>
       ) : null}

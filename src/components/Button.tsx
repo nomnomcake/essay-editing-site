@@ -33,7 +33,7 @@ interface AsLink extends BaseProps {
 export type ButtonProps = AsButton | AsLink;
 
 const variants: Record<Variant, string> = {
-  primary: "bg-coral hover:bg-coral-deep",
+  primary: "bg-accent hover:bg-accent-deep",
   secondary: "bg-periwinkle hover:brightness-95",
   ghost: "bg-cream hover:bg-peach-bg",
 };

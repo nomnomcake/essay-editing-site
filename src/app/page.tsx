@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   description: c.meta.description,
 };
 
-const tones: FolderTone[] = ["coral", "periwinkle", "gold", "periwinkle"];
+const tones: FolderTone[] = ["accent", "periwinkle", "gold", "periwinkle"];
 
 export default function HomePage() {
   const faqAnchor = `#${c.faqPreview.anchor}`;
@@ -43,7 +43,7 @@ export default function HomePage() {
           with a few crossing the middle in three parallax layers. Bank sizes
           are set per breakpoint rather than CSS-scaled, so outline weight
           stays constant. */}
-      <section className="relative border-b-[2.5px] border-ink bg-coral">
+      <section className="relative border-b-[3px] border-ink bg-accent">
         <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
           <Sun size={56} animated className="absolute top-6 left-6 md:top-24 md:left-auto md:right-28" />
 

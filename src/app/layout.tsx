@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Nunito, Silkscreen } from "next/font/google";
+import { Space_Grotesk, Silkscreen } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/site/Footer";
 import { Shell } from "@/components/site/Shell";
@@ -13,7 +13,7 @@ const pixel = Silkscreen({
   display: "swap",
 });
 
-const body = Nunito({
+const body = Space_Grotesk({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",

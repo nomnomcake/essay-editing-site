@@ -18,7 +18,54 @@ import {
   Sun,
   type CloudShape,
 } from "@/components";
+import { Fredoka, Nunito, Work_Sans } from "next/font/google";
+import {
+  BookIcon,
+  CalendarIcon,
+  CursorIcon,
+  DiscIcon,
+  FloppyIcon,
+  HourglassIcon,
+  LightbulbIcon,
+  MonitorIcon,
+  PaperclipIcon,
+  PencilIcon,
+  SpeechIcon,
+  TrashIcon,
+  WindowDots,
+} from "@/components";
 import { key } from "./copy";
+
+/* Candidate reading fonts. Imported here only, so they never load on the public site. */
+const fredoka = Fredoka({ subsets: ["latin"], display: "swap" });
+const workSans = Work_Sans({ subsets: ["latin"], display: "swap" });
+const nunito = Nunito({ subsets: ["latin"], display: "swap" });
+
+const FONT_OPTIONS = [
+  { name: "Space Grotesk ✓", className: "font-body" },
+  { name: "Fredoka", className: fredoka.className },
+  { name: "Work Sans", className: workSans.className },
+  { name: "Nunito (was)", className: nunito.className },
+];
+
+const ICONS = [
+  { name: "folder", El: FolderIcon },
+  { name: "globe", El: GlobeIcon },
+  { name: "star", El: StarIcon },
+  { name: "envelope", El: EnvelopeIcon },
+  { name: "floppy", El: FloppyIcon },
+  { name: "monitor", El: MonitorIcon },
+  { name: "cursor", El: CursorIcon },
+  { name: "hourglass", El: HourglassIcon },
+  { name: "pencil", El: PencilIcon },
+  { name: "paperclip", El: PaperclipIcon },
+  { name: "book", El: BookIcon },
+  { name: "lightbulb", El: LightbulbIcon },
+  { name: "trash", El: TrashIcon },
+  { name: "calendar", El: CalendarIcon },
+  { name: "speech", El: SpeechIcon },
+  { name: "disc", El: DiscIcon },
+];
 
 export const metadata: Metadata = {
   title: key.title,
@@ -78,6 +125,71 @@ export default function DesignKeyPage() {
         </h1>
         <p className="max-w-prose text-lg">{key.intro}</p>
       </header>
+
+      {/* 0. For review */}
+      <Section heading={key.review.heading} note={key.review.note}>
+        <ul className="grid gap-2 sm:grid-cols-2">
+          {key.review.changed.map((c) => (
+            <li key={c} className="flex gap-2 outline-ink r-soft bg-gold/40 p-3 text-sm">
+              <Sparkle tone="gold" size={13} className="mt-1 shrink-0" />
+              <span>{c}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-4">
+          <div className="flex flex-col gap-1">
+            <h3 className="font-pixel text-xs">{key.review.fontHeading}</h3>
+            <p className="text-sm">{key.review.fontNote}</p>
+          </div>
+          <ul className="flex flex-col gap-3">
+            {FONT_OPTIONS.map((f) => (
+              <li key={f.name} className="grid gap-1 r-tight bg-peach-bg p-3 sm:grid-cols-[10rem_1fr] sm:items-baseline sm:gap-4">
+                <span className="font-pixel text-[10px]">{f.name}</span>
+                <span className={`${f.className} text-lg`}>{key.review.fontSample}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-4">
+          <div className="flex flex-col gap-1">
+            <h3 className="font-pixel text-xs">{key.review.accentHeading}</h3>
+            <p className="text-sm">{key.review.accentNote}</p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {key.review.accents.map((a) => (
+              <figure key={a.hex} className="flex flex-col gap-2">
+                <div
+                  className="relative h-28 overflow-hidden outline-ink r-tight"
+                  style={{ background: a.hex }}
+                >
+                  <Cloud size="xs" shape="lumpy" flip className="absolute -top-3 -left-2" />
+                  <Cloud size="sm" shape="tall" className="absolute -bottom-4 right-0" />
+                  <Sun size={20} className="absolute top-3 right-4" />
+                </div>
+                <figcaption className="flex flex-col gap-1">
+                  <span className="font-pixel text-[10px]">
+                    {a.name} {a.applied ? "✓" : ""}
+                  </span>
+                  <span className="font-pixel text-[10px]">{a.hex}</span>
+                  <span className="text-xs">
+                    {key.review.accentCols.ink} {a.ink} / {key.review.accentCols.cloud} {a.cloud} /{" "}
+                    {key.review.accentCols.page} {a.page}
+                  </span>
+                  <span
+                    className="mt-1 r-tight px-2 py-1 text-center font-pixel text-[10px]"
+                    style={{ background: a.hex, border: "3px solid var(--ink)" }}
+                  >
+                    button
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="text-sm">{key.review.accentFootnote}</p>
+        </div>
+      </Section>
 
       {/* 1. Palette */}
       <Section heading={key.palette.heading} source={key.palette.source} note={key.palette.note}>
@@ -146,7 +258,7 @@ export default function DesignKeyPage() {
         <div className="flex flex-wrap items-end gap-6 outline-ink r-soft bg-cream p-4">
           <span className="outline-ink r-soft bg-peach-bg px-4 py-3 font-pixel text-[10px]">r-soft</span>
           <span className="outline-ink r-tight bg-peach-bg px-4 py-3 font-pixel text-[10px]">r-tight</span>
-          <span className="outline-ink r-tight bg-coral px-4 py-3 font-pixel text-[10px] shadow-flat">shadow-flat</span>
+          <span className="outline-ink r-tight bg-accent px-4 py-3 font-pixel text-[10px] shadow-flat">shadow-flat</span>
           <button type="button" className="focus-retro outline-ink r-tight bg-periwinkle px-4 py-3 font-pixel text-[10px]">
             focus-retro (tab to me)
           </button>
@@ -155,7 +267,7 @@ export default function DesignKeyPage() {
           <div className="flex flex-col gap-3 p-2">
             <h3 className="font-pixel text-xs">{key.form.strokeHeading}</h3>
             <p className="max-w-prose">{key.form.strokeNote}</p>
-            <div className="flex flex-wrap items-end gap-4 r-tight bg-coral p-4">
+            <div className="flex flex-wrap items-end gap-4 r-tight bg-accent p-4">
               <Cloud size="xs" shape="puff" />
               <Cloud size="sm" shape="lumpy" />
               <Cloud size="md" shape="tall" />
@@ -178,7 +290,7 @@ export default function DesignKeyPage() {
           </Specimen>
 
           <Specimen label={key.components.labels.folder} note={key.components.labels.folderNote}>
-            <FolderTab label="coral" tone="coral" className="w-40">
+            <FolderTab label="accent" tone="accent" className="w-40">
               <p className="text-sm">Card body.</p>
             </FolderTab>
             <FolderTab label="gold" tone="gold" featured className="w-40">
@@ -236,11 +348,23 @@ export default function DesignKeyPage() {
         </div>
       </Section>
 
+      {/* 5. Icons */}
+      <Section heading={key.icons.heading} source={key.icons.source} note={key.icons.note}>
+        <ul className="grid grid-cols-3 gap-4 outline-ink r-soft bg-cream p-5 sm:grid-cols-4 md:grid-cols-6">
+          {ICONS.map(({ name, El }) => (
+            <li key={name} className="flex flex-col items-center gap-2">
+              <El size={44} />
+              <span className="text-center font-pixel text-[10px]">{name}</span>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
       {/* 5. Clouds */}
       <Section heading={key.clouds.heading} source={key.clouds.source} note={key.clouds.note}>
         <div className="flex flex-col gap-4 outline-ink r-soft bg-cream p-4">
           <h3 className="font-pixel text-xs">{key.clouds.shapeLabel}</h3>
-          <div className="flex flex-wrap items-end gap-6 r-tight bg-coral p-5">
+          <div className="flex flex-wrap items-end gap-6 r-tight bg-accent p-5">
             {CLOUD_SHAPES.map((s) => (
               <figure key={s} className="flex flex-col items-center gap-2">
                 <Cloud size="sm" shape={s} />
@@ -255,7 +379,7 @@ export default function DesignKeyPage() {
           <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-4">
             <h3 className="font-pixel text-xs">{key.clouds.flipHeading}</h3>
             <p className="text-sm">{key.clouds.flipNote}</p>
-            <div className="flex items-end gap-6 r-tight bg-coral p-5">
+            <div className="flex items-end gap-6 r-tight bg-accent p-5">
               <figure className="flex flex-col items-center gap-2">
                 <Cloud size="sm" shape="lumpy" />
                 <figcaption className="font-pixel text-[10px]">default</figcaption>
@@ -270,7 +394,7 @@ export default function DesignKeyPage() {
           <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-4">
             <h3 className="font-pixel text-xs">{key.clouds.banksHeading}</h3>
             <p className="text-sm">{key.clouds.banksNote}</p>
-            <div className="relative h-40 overflow-hidden r-tight bg-coral">
+            <div className="relative h-40 overflow-hidden r-tight bg-accent">
               <Sun size={28} className="absolute top-4 right-6" />
               <Cloud size="sm" shape="lumpy" flip className="absolute -top-4 -left-4" />
               <Cloud size="xs" shape="puff" flip className="absolute -top-2 left-24" />
@@ -286,7 +410,7 @@ export default function DesignKeyPage() {
         <div className="overflow-x-auto outline-ink r-soft bg-cream">
           <table className="w-full min-w-[34rem]">
             <thead>
-              <tr className="border-b-[2.5px] border-ink bg-peach-bg font-pixel text-[11px]">
+              <tr className="border-b-[3px] border-ink bg-peach-bg font-pixel text-[11px]">
                 <th scope="col" className="px-4 py-3 text-left">name</th>
                 <th scope="col" className="px-4 py-3 text-left">timing</th>
                 <th scope="col" className="px-4 py-3 text-left">where</th>
@@ -308,7 +432,7 @@ export default function DesignKeyPage() {
           <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-4">
             <h3 className="font-pixel text-xs">{key.motion.parallaxHeading}</h3>
             <p className="text-sm">{key.motion.parallaxNote}</p>
-            <div className="relative h-32 overflow-hidden r-tight bg-coral">
+            <div className="relative h-32 overflow-hidden r-tight bg-accent">
               <Cloud size="xs" shape="puff" drift={30} delay={5} className="absolute left-0 top-3" />
               <Cloud size="sm" shape="wide" drift={20} delay={8} className="absolute left-0 top-12" />
               <Cloud size="md" shape="tall" drift={13} delay={3} className="absolute left-0 bottom-0" />
@@ -325,6 +449,31 @@ export default function DesignKeyPage() {
               </ul>
             </div>
           </DottedFrame>
+        </div>
+      </Section>
+
+      {/* 8. Retro treatments */}
+      <Section heading={key.retro.heading} source={key.retro.source} note={key.retro.note}>
+        <ul className="grid gap-4 md:grid-cols-3">
+          {key.retro.items.map((r, i) => (
+            <li key={r.name} className="flex flex-col gap-2 outline-ink r-soft bg-cream p-4">
+              <span className="font-pixel text-[11px]">{r.name}</span>
+              <span
+                className={`h-16 outline-ink r-tight bg-cream ${
+                  i === 0 ? "stripes-ink opacity-60" : i === 1 ? "dither" : "hatch-ink"
+                }`}
+              />
+              <span className="text-sm">{r.use}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-4">
+          <h3 className="font-pixel text-xs">{key.retro.dotsHeading}</h3>
+          <p className="text-sm">{key.retro.dotsNote}</p>
+          <div className="flex items-center gap-3 r-tight bg-peach-bg p-4">
+            <span className="stripes-ink h-2.5 flex-1 opacity-45" />
+            <WindowDots />
+          </div>
         </div>
       </Section>
 

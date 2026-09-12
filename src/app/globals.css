@@ -3,29 +3,29 @@
 /* ---------------------------------------------------------------------------
    Design tokens
    Contrast rule: body text is only ever --ink on --cream or --ink on --peach-bg.
-   Never coral or periwinkle text on peach.
+   Never accent or periwinkle text on peach.
    --------------------------------------------------------------------------- */
 :root {
   --peach-bg: #fbe3d8; /* page background */
   --cream: #fff9f4; /* card fill */
   --ink: #5a3a34; /* every outline, every piece of body text */
-  --coral: #e89a94; /* primary accent, sky, CTA fill */
-  --coral-deep: #d97b77; /* hover */
+  --accent: #8fbcaa; /* sky, primary CTA fill. Was salmon #e89a94. */
+  --accent-deep: #74a290; /* primary hover, inline error text */
   --periwinkle: #b9c6e8; /* secondary buttons, icon fills */
   --gold: #f2c879; /* stars, sun, highlights */
 
-  --outline-width: 2.5px;
+  --outline-width: 3px;
   --radius-soft: 12px;
   --radius-tight: 8px;
 }
 
-/* Register tokens with Tailwind so bg-cream, border-ink, text-coral etc. work. */
+/* Register tokens with Tailwind so bg-cream, border-ink, text-accent etc. work. */
 @theme inline {
   --color-peach-bg: var(--peach-bg);
   --color-cream: var(--cream);
   --color-ink: var(--ink);
-  --color-coral: var(--coral);
-  --color-coral-deep: var(--coral-deep);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
   --color-periwinkle: var(--periwinkle);
   --color-gold: var(--gold);
 
@@ -140,6 +140,35 @@
   }
 }
 
+
+
+/* ---------------------------------------------------------------------------
+   Retro surface treatments
+   --------------------------------------------------------------------------- */
+
+/* Classic desktop title bar: fine horizontal rules behind the title. */
+@utility stripes-ink {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--ink) 0 1.5px,
+    transparent 1.5px 5px
+  );
+}
+
+/* Halftone dither, for shading a panel without introducing a new colour. */
+@utility dither {
+  background-image: radial-gradient(rgb(90 58 52 / 0.3) 1.2px, transparent 1.2px);
+  background-size: 6px 6px;
+}
+
+/* Diagonal hatch, for inert or disabled surfaces. */
+@utility hatch-ink {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgb(90 58 52 / 0.18) 0 2px,
+    transparent 2px 7px
+  );
+}
 
 /* ---------------------------------------------------------------------------
    Base

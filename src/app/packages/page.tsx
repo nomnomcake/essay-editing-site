@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: c.meta.description,
 };
 
-const tones: FolderTone[] = ["coral", "periwinkle", "gold", "periwinkle"];
+const tones: FolderTone[] = ["accent", "periwinkle", "gold", "periwinkle"];
 
 export default function PackagesPage() {
   return (

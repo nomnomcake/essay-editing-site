@@ -10,6 +10,51 @@ export const key = {
     "The system this site is built from. Everything here is the real component or the real token, not a picture of one. Change a value in the source and this page changes with it.",
   sourceLabel: "source",
 
+  review: {
+    heading: "0. for review",
+    note: "Four changes are in. Two of them are taste calls, so the alternates are rendered live below. Say which you want and I will switch the token; everything downstream follows.",
+    changed: [
+      "Body font is now Space Grotesk, was Nunito.",
+      "Accent is now sage #8FBCAA, was salmon #E89A94.",
+      "Twelve new icons, sixteen in total.",
+      "Chunkier 3px outlines, striped title bars, window dots, dither and hatch fills.",
+    ],
+    fontHeading: "body font, alternates",
+    fontNote: "Silkscreen stays as the pixel display face in every option. Only the reading font changes.",
+    fontSample: "Supplements first, personal statement second. You write. I mark it up.",
+    accentHeading: "accent, alternates",
+    accentNote:
+      "Measured against three things: ink text on the colour, white clouds against it, and separation from the peach page. Sage is the only candidate besides deep sky that clears all three.",
+    accentCols: { name: "name", hex: "hex", ink: "ink on it", cloud: "cloud pop", page: "vs page" },
+    accents: [
+      { name: "sage (applied)", hex: "#8FBCAA", ink: "4.76", cloud: "2.11", page: "1.72", applied: true },
+      { name: "deep sky", hex: "#8FB4DC", ink: "4.66", cloud: "2.16", page: "1.76", applied: false },
+      { name: "dusty lilac", hex: "#C9B8DE", ink: "5.45", cloud: "1.84", page: "1.50", applied: false },
+      { name: "salmon (was)", hex: "#E89A94", ink: "4.54", cloud: "2.21", page: "1.80", applied: false },
+    ],
+    accentFootnote:
+      "Ink on it needs 4.5 for body text. Cloud pop wants 1.6 or more or the clouds go flat. Vs page wants 1.5 or more or the sky merges into the page.",
+  },
+
+  icons: {
+    heading: "5. icons",
+    source: "src/components/Icons.tsx",
+    note: "Sixteen glyphs. Each is drawn on the same 56px grid with the same non-scaling outline, so a row at mixed sizes still looks like one set.",
+  },
+
+  retro: {
+    heading: "8. retro treatments",
+    source: "src/app/globals.css",
+    note: "Surface patterns that add period texture without introducing a new colour. All three are built from ink at low opacity.",
+    items: [
+      { name: ".stripes-ink", use: "Fine horizontal rules in a title bar, as on a classic desktop." },
+      { name: ".dither", use: "Halftone dot shading for a panel that should sit back." },
+      { name: ".hatch-ink", use: "Diagonal hatch for an inert or unavailable surface." },
+    ],
+    dotsHeading: "window dots",
+    dotsNote: "The two outlined circles at the right of a title bar. Decorative, aria-hidden, and now on every window.",
+  },
+
   palette: {
     heading: "1. palette",
     source: "src/app/globals.css",
@@ -18,16 +63,16 @@ export const key = {
       { token: "--peach-bg", hex: "#FBE3D8", use: "Page background. Carries the faint grid.", className: "bg-peach-bg" },
       { token: "--cream", hex: "#FFF9F4", use: "Card and panel fill. Window chrome.", className: "bg-cream" },
       { token: "--ink", hex: "#5A3A34", use: "Every outline. Every piece of text.", className: "bg-ink" },
-      { token: "--coral", hex: "#E89A94", use: "Sky. Primary button fill.", className: "bg-coral" },
-      { token: "--coral-deep", hex: "#D97B77", use: "Primary button hover. Inline error text.", className: "bg-coral-deep" },
+      { token: "--accent", hex: "#8FBCAA", use: "Sky. Primary button fill. Was salmon.", className: "bg-accent" },
+      { token: "--accent-deep", hex: "#74A290", use: "Primary button hover. Inline error text.", className: "bg-accent-deep" },
       { token: "--periwinkle", hex: "#B9C6E8", use: "Secondary buttons. Icon fills.", className: "bg-periwinkle" },
       { token: "--gold", hex: "#F2C879", use: "Sun, stars, sparkles, highlight tags.", className: "bg-gold" },
     ],
     ruleHeading: "the contrast rule",
     rules: [
       "Body text is only ever ink on cream, or ink on peach.",
-      "Never coral or periwinkle text on peach.",
-      "Text over the coral sky sits on a cream panel, never straight on the coral.",
+      "Never accent or periwinkle text on peach.",
+      "Text over the accent sky sits on a cream panel, never straight on the accent.",
     ],
   },
 
@@ -44,7 +89,7 @@ export const key = {
         sample: "window title / button",
       },
       {
-        name: "Nunito",
+        name: "Space Grotesk",
         variable: "--font-body",
         role: "Headings and all body copy. Everything a person actually reads.",
         className: "font-body",
@@ -68,7 +113,7 @@ export const key = {
     source: "src/app/globals.css",
     note: "Four utilities do almost all the visual work. Outlines are one weight everywhere, at every scale.",
     utilities: [
-      { name: ".outline-ink", value: "2.5px solid var(--ink)", use: "Every border on every element." },
+      { name: ".outline-ink", value: "3px solid var(--ink)", use: "Every border on every element." },
       { name: ".r-soft", value: "12px radius", use: "Windows, cards, panels." },
       { name: ".r-tight", value: "8px radius", use: "Buttons, inputs, tabs, small chips." },
       { name: ".shadow-flat", value: "3px 3px 0 var(--ink)", use: "Raised controls. Collapses to 0 0 on :active." },
@@ -99,14 +144,14 @@ export const key = {
       hearts: "HeartRow",
       heartsNote: "A rating beside a quote. Not interactive.",
       icons: "Desktop icons",
-      iconsNote: "Folder, globe, star, envelope. Decorative glyphs inside real links.",
+      iconsNote: "Sixteen glyphs on one 56px grid with a shared non-scaling outline. Decorative; the link around them carries the name.",
       field: "Field",
       fieldNote: "The one form atom. Input, textarea, select and radio all come from it.",
     },
   },
 
   clouds: {
-    heading: "5. clouds",
+    heading: "6. clouds",
     source: "src/components/Decorations.tsx",
     note: "Five silhouettes so a sky never reads as one shape stamped repeatedly. Every lobe is a true circular arc on a flat base, so the shape stays round at any size.",
     shapeLabel: "silhouette",
@@ -121,7 +166,7 @@ export const key = {
   },
 
   motion: {
-    heading: "6. motion",
+    heading: "7. motion",
     source: "src/app/globals.css",
     note: "Four animations. All decorative, none required to understand the page.",
     table: [
@@ -142,7 +187,7 @@ export const key = {
   },
 
   rules: {
-    heading: "7. standing rules",
+    heading: "9. standing rules",
     note: "These hold on every page and every phase.",
     items: [
       "Mobile first. 375px is the design floor, not an afterthought.",

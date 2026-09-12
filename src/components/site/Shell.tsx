@@ -2,7 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { pages, ui } from "@/content";
+import { pages } from "@/content";
+import { WindowDots } from "@/components/Icons";
 import { SiteTabs } from "./SiteTabs";
 
 const MAIN_ID = "main";
@@ -23,18 +24,16 @@ export function Shell({ children }: { children: ReactNode }) {
     <div className="flex h-dvh flex-col p-2 md:p-3">
       <div className="flex min-h-0 flex-1 flex-col overflow-hidden outline-ink r-soft bg-cream text-ink">
         {/* Title bar with the real navigation tabs */}
-        <div className="flex items-end gap-2 border-b-[2.5px] border-ink bg-cream px-3 pt-2">
+        <div className="flex items-end gap-2 border-b-[3px] border-ink bg-cream px-3 pt-2">
           <SiteTabs />
-          <span
-            aria-hidden="true"
-            className="mb-2 inline-flex size-5 shrink-0 items-center justify-center outline-ink r-tight bg-cream font-pixel text-[10px] leading-none"
-          >
-            {ui.glyph.close}
+          <span aria-hidden="true" className="mb-1.5 flex shrink-0 items-center gap-3 self-center">
+            <span className="stripes-ink hidden h-2.5 w-16 opacity-45 md:block" />
+            <WindowDots />
           </span>
         </div>
 
         {/* Address bar, decorative */}
-        <div aria-hidden="true" className="hidden items-center gap-2 border-b-[2.5px] border-ink bg-cream px-3 py-2 md:flex">
+        <div aria-hidden="true" className="hidden items-center gap-2 border-b-[3px] border-ink bg-cream px-3 py-2 md:flex">
           <Glyph>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M9 2 4 7l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

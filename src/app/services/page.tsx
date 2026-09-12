@@ -50,7 +50,7 @@ export default function ServicesPage() {
           {/* Desktop table */}
           <table className="hidden w-full md:table">
             <thead>
-              <tr className="border-b-[2.5px] border-ink bg-peach-bg font-pixel text-[11px]">
+              <tr className="border-b-[3px] border-ink bg-peach-bg font-pixel text-[11px]">
                 <th scope="col" className="px-4 py-3 text-left">{cols.package}</th>
                 <th scope="col" className="px-4 py-3 text-right">{cols.essays}</th>
                 <th scope="col" className="px-4 py-3 text-right">{cols.words}</th>
@@ -78,7 +78,7 @@ export default function ServicesPage() {
           {/* Mobile: stacked definition lists */}
           <div className="flex flex-col md:hidden">
             {packages.map((p) => (
-              <div key={p.id} className="border-b-[2.5px] border-ink p-4 last:border-b-0 odd:bg-cream even:bg-peach-bg/60">
+              <div key={p.id} className="border-b-[3px] border-ink p-4 last:border-b-0 odd:bg-cream even:bg-peach-bg/60">
                 <h3 className="mb-2 font-semibold">{p.name}</h3>
                 <dl className="grid grid-cols-2 gap-y-1 text-sm">
                   <dt className="font-pixel text-[10px] pt-1">{cols.essays}</dt>

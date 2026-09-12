@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export type FolderTone = "coral" | "periwinkle" | "gold";
+export type FolderTone = "accent" | "periwinkle" | "gold";
 
 export interface FolderTabProps {
   /** Text on the protruding tab. */
@@ -13,7 +13,7 @@ export interface FolderTabProps {
 }
 
 const tones: Record<FolderTone, { tab: string; stripe: string }> = {
-  coral: { tab: "bg-coral", stripe: "var(--coral)" },
+  accent: { tab: "bg-accent", stripe: "var(--accent)" },
   periwinkle: { tab: "bg-periwinkle", stripe: "var(--periwinkle)" },
   gold: { tab: "bg-gold", stripe: "var(--gold)" },
 };
@@ -30,7 +30,7 @@ export function FolderTab({
   return (
     <div className={`flex flex-col text-ink ${className}`}>
       <div
-        className={`-mb-[2.5px] ml-3 inline-flex w-fit max-w-[80%] outline-ink r-tight rounded-b-none border-b-0 px-3 py-1 font-pixel text-xs ${t.tab}`}
+        className={`-mb-[3px] ml-3 inline-flex w-fit max-w-[80%] outline-ink r-tight rounded-b-none border-b-0 px-3 py-1 font-pixel text-xs ${t.tab}`}
       >
         <span className="truncate">{label}</span>
       </div>

@@ -21,7 +21,7 @@ type UiState = "rest" | "hover" | "focus" | "disabled" | "error";
 
 const forced: Record<UiState, string> = {
   rest: "",
-  hover: "[&_button]:bg-coral-deep [&_a]:bg-coral-deep",
+  hover: "[&_button]:bg-accent-deep [&_a]:bg-accent-deep",
   focus:
     "[&_button]:outline-2 [&_button]:outline-dashed [&_button]:outline-ink [&_button]:outline-offset-2 [&_input]:outline-2 [&_input]:outline-dashed [&_input]:outline-ink [&_input]:outline-offset-2 [&_a]:outline-2 [&_a]:outline-dashed [&_a]:outline-ink [&_a]:outline-offset-2",
   disabled: "",
@@ -94,7 +94,7 @@ export function Gallery() {
             <RetroWindow title={g.windowTitle} variant="plain">
               <p>{g.lorem}</p>
             </RetroWindow>
-            <RetroWindow title={g.windowTitle} variant="browser" fill="coral" flush>
+            <RetroWindow title={g.windowTitle} variant="browser" fill="accent" flush>
               <div className="relative h-40 overflow-hidden">
                 <Sun className="absolute top-4 left-6" />
                 <Cloud size="lg" className="absolute top-6 right-6" />
@@ -132,7 +132,7 @@ export function Gallery() {
       <Section title={g.sections.folder}>
         <Both>
           <div className="grid gap-6 grid-cols-1 @md:grid-cols-3">
-            <FolderTab label={g.folderLabels[0]} tone="coral">
+            <FolderTab label={g.folderLabels[0]} tone="accent">
               <p>{g.short}</p>
             </FolderTab>
             <FolderTab label={g.folderLabels[1]} tone="periwinkle" featured>

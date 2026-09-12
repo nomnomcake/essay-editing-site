@@ -84,7 +84,7 @@ export function FaqList({ questions }: { questions: Question[] }) {
                 <span className="flex-1">{item.question}</span>
                 <span className="hidden font-pixel text-[10px] sm:inline">{item.category}</span>
               </summary>
-              <div className="flex flex-col gap-3 border-t-[2.5px] border-ink px-4 py-4">
+              <div className="flex flex-col gap-3 border-t-[3px] border-ink px-4 py-4">
                 <p className="max-w-prose">{item.answer}</p>
                 <a
                   href={`#${item.id}`}

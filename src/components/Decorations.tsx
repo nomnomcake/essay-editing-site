@@ -68,7 +68,7 @@ export function Cloud({
         d={shapes[shape]}
         fill="#ffffff"
         stroke="var(--ink)"
-        strokeWidth="3"
+        strokeWidth="3.5"
         strokeLinejoin="round"
         vectorEffect="non-scaling-stroke"
         transform={flip ? "translate(0,90) scale(1,-1)" : undefined}
