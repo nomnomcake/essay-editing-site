@@ -39,29 +39,36 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={serviceSchema()} />
-      {/* Sky: the actual top of the page */}
+      {/* Sky: the top of the page. Clouds cross in three parallax layers, far ones slowest. */}
       <section className="border-b-[2.5px] border-ink bg-coral">
-        <div className="relative h-64 overflow-hidden md:h-96">
-          <Sun size={56} animated className="absolute top-8 left-8 md:top-12 md:left-20" />
+        <div className="relative h-72 overflow-hidden md:h-[26rem]">
+          <Sun size={64} animated className="absolute top-10 left-8 md:top-16 md:left-20" />
 
-          {/* Static clouds: always present, so reduced-motion still gets a sky */}
-          <Cloud size="xl" className="absolute -right-10 top-6 hidden md:inline-flex" />
-          <Cloud size="lg" className="absolute right-4 top-8 md:hidden" />
-          <Cloud size="lg" className="absolute -left-8 bottom-4 md:left-1/4 md:-bottom-6" />
-          <Cloud size="md" className="absolute right-1/3 -bottom-4 hidden md:inline-flex" />
+          {/* Anchored clouds. Never move, so reduced motion still gets a full sky. */}
+          <Cloud size="xl" animated className="absolute -right-16 -top-8 hidden md:inline-flex" />
+          <Cloud size="lg" shape="wide" animated className="absolute -right-10 top-2 md:hidden" />
+          <Cloud size="xl" animated className="absolute -left-24 -bottom-12" />
+          <Cloud size="lg" shape="wide" animated className="absolute right-1/4 -bottom-14 hidden md:inline-flex" />
 
-          {/* Drifting clouds at three depths */}
-          <Cloud size="xl" drift={110} delay={20} className="absolute left-0 top-2 hidden md:inline-flex" />
-          <Cloud size="lg" drift={80} delay={55} className="absolute left-0 top-24 md:top-32" animated />
-          <Cloud size="md" drift={60} delay={10} className="absolute left-0 top-10 md:top-16" />
-          <Cloud size="sm" drift={45} delay={30} className="absolute left-0 bottom-10 opacity-80" />
-          <Cloud size="lg" drift={95} delay={75} className="absolute left-0 -bottom-8 hidden md:inline-flex" animated />
+          {/* Far layer: small and slow. delay places each one part-way across at load. */}
+          <Cloud size="sm" drift={84} delay={25} className="absolute left-0 top-6" />
+          <Cloud size="sm" drift={78} delay={48} className="absolute left-0 top-28 hidden md:inline-flex" />
+          <Cloud size="md" shape="wide" drift={88} delay={62} className="absolute left-0 top-16" />
 
-          <Sparkle tone="cream" size={22} className="absolute top-12 left-1/2" animated />
-          <Sparkle tone="cream" size={14} className="absolute top-24 right-1/4" animated />
-          <Sparkle tone="cream" size={16} className="absolute bottom-12 left-16" animated />
-          <Sparkle tone="cream" size={12} className="hidden md:block absolute top-1/2 left-1/3" animated />
-          <Sparkle tone="gold" size={18} className="hidden md:block absolute bottom-16 right-16" animated />
+          {/* Mid layer */}
+          <Cloud size="lg" drift={62} delay={12} className="absolute left-0 top-24 md:top-36" animated />
+          <Cloud size="md" shape="wide" drift={66} delay={49} className="absolute left-0 bottom-20 hidden md:inline-flex" />
+
+          {/* Near layer: big and fastest, low in the frame */}
+          <Cloud size="xl" drift={44} delay={24} className="absolute left-0 -bottom-10" animated />
+          <Cloud size="xl" shape="wide" drift={48} delay={38} className="absolute left-0 top-2 hidden md:inline-flex" />
+
+          <Sparkle tone="cream" size={24} className="absolute top-14 left-1/2" animated />
+          <Sparkle tone="cream" size={15} className="absolute top-28 right-1/4" animated />
+          <Sparkle tone="cream" size={18} className="absolute bottom-14 left-16" animated />
+          <Sparkle tone="cream" size={13} className="hidden md:block absolute top-1/2 left-1/3" animated />
+          <Sparkle tone="gold" size={20} className="hidden md:block absolute bottom-20 right-20" animated />
+          <Sparkle tone="cream" size={16} className="hidden md:block absolute top-20 right-1/3" animated />
         </div>
       </section>
 

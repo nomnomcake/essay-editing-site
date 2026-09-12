@@ -73,13 +73,13 @@
 /* ---------------------------------------------------------------------------
    Decorative motion. Elements using these are hidden under reduced motion.
    --------------------------------------------------------------------------- */
-@keyframes float {
+@keyframes bob {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(0) scale(1, 1);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-9px) scale(1.03, 0.97);
   }
 }
 
@@ -87,29 +87,43 @@
   0%,
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) rotate(0deg);
   }
   50% {
-    opacity: 0.5;
-    transform: scale(0.8);
+    opacity: 0.45;
+    transform: scale(0.72) rotate(45deg);
   }
 }
 
 @keyframes drift {
   from {
-    transform: translateX(-30vw);
+    transform: translateX(-40vw);
   }
   to {
-    transform: translateX(110vw);
+    transform: translateX(120vw);
   }
+}
+
+@keyframes pulse-sun {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.06);
+  }
+}
+
+@utility animate-bob {
+  animation: bob 7s ease-in-out infinite;
 }
 
 @utility animate-float {
-  animation: float 6s ease-in-out infinite;
+  animation: bob 7s ease-in-out infinite;
 }
 
 @utility animate-float-slow {
-  animation: float 9s ease-in-out infinite;
+  animation: pulse-sun 9s ease-in-out infinite;
 }
 
 @utility animate-drift {
@@ -117,10 +131,15 @@
 }
 
 @utility animate-twinkle {
-  animation: twinkle 2.4s ease-in-out infinite;
-  &:nth-child(2n) { animation-delay: -0.8s; }
-  &:nth-child(3n) { animation-delay: -1.6s; }
+  animation: twinkle 3s ease-in-out infinite;
+  &:nth-child(2n) {
+    animation-delay: -1s;
+  }
+  &:nth-child(3n) {
+    animation-delay: -2s;
+  }
 }
+
 
 /* ---------------------------------------------------------------------------
    Base

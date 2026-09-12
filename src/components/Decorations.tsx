@@ -1,46 +1,58 @@
 export interface CloudProps {
   size?: "sm" | "md" | "lg" | "xl";
-  /** Gentle vertical bob. Hidden entirely under prefers-reduced-motion. */
+  /** Two silhouettes so a sky is never one cloud repeated. */
+  shape?: "tall" | "wide";
+  /** Gentle bob and squash, as if the cloud is breathing. Stops under prefers-reduced-motion. */
   animated?: boolean;
-  /** Seconds for one slow pass across the sky, left to right. Hidden under prefers-reduced-motion. */
+  /** Seconds for one pass across the sky, left to right. Hidden under prefers-reduced-motion. */
   drift?: number;
-  /** Negative delay in seconds to start part-way across. */
+  /** Seconds of negative delay, so a cloud starts part-way through its pass. */
   delay?: number;
   className?: string;
 }
 
 const cloudWidths: Record<NonNullable<CloudProps["size"]>, number> = {
-  sm: 72,
-  md: 120,
-  lg: 180,
-  xl: 260,
+  sm: 96,
+  md: 156,
+  lg: 224,
+  xl: 320,
 };
 
-/** Big cumulus cloud for sky panels and page corners. Never carries meaning. */
-export function Cloud({ size = "md", animated = false, drift, delay = 0, className = "" }: CloudProps) {
+/**
+ * Every lobe is a true circular arc, so the silhouette stays round at any size.
+ * Flat base, pure white, one thick outline, as in the reference.
+ */
+const shapes = {
+  tall: "M12 80a22 22 0 0 1 10-32 26 26 0 0 1 30-30 34 34 0 0 1 56 6 24 24 0 0 1 26 22 20 20 0 0 1 14 34Z",
+  wide: "M20 80a24 24 0 0 1-2-28 26 26 0 0 1 38-24 30 30 0 0 1 50 6 24 24 0 0 1 30 18 22 22 0 0 1 2 28Z",
+} as const;
+
+/** Cumulus cloud for sky panels and page corners. Decorative only. */
+export function Cloud({
+  size = "md",
+  shape = "tall",
+  animated = false,
+  drift,
+  delay = 0,
+  className = "",
+}: CloudProps) {
   const w = cloudWidths[size];
-  const h = Math.round(w * 0.56);
-  const moving = animated || drift !== undefined;
+  const h = Math.round((w * 90) / 160);
+
   const svg = (
     <svg
       width={w}
       height={h}
-      viewBox="0 0 120 67"
+      viewBox="0 0 160 90"
       aria-hidden="true"
       focusable="false"
-      className={animated ? "animate-float" : undefined}
+      className={animated ? "animate-bob" : undefined}
       style={animated ? { animationDelay: `${-delay}s` } : undefined}
     >
-      <path
-        d="M14 62Q1 62 2 49Q3 38 15 37Q13 22 28 20Q31 5 48 9Q57-2 71 7Q86 1 93 16Q110 14 111 31Q123 35 119 50Q118 62 104 62Z"
-        fill="#ffffff"
-        stroke="var(--ink)"
-        strokeWidth="3"
-        strokeLinejoin="round"
-      />
-      <path d="M22 46Q26 38 36 40M78 30Q86 24 96 30" fill="none" stroke="var(--ink)" strokeWidth="2" strokeLinecap="round" opacity="0.35" />
+      <path d={shapes[shape]} fill="#ffffff" stroke="var(--ink)" strokeWidth="3" strokeLinejoin="round" />
     </svg>
   );
+
   if (drift !== undefined) {
     return (
       <span
@@ -52,8 +64,12 @@ export function Cloud({ size = "md", animated = false, drift, delay = 0, classNa
       </span>
     );
   }
+
   return (
-    <span aria-hidden="true" className={`inline-flex ${moving ? "motion-reduce:hidden" : ""} ${className}`}>
+    <span
+      aria-hidden="true"
+      className={`inline-flex ${animated ? "motion-reduce:[&_svg]:animate-none" : ""} ${className}`}
+    >
       {svg}
     </span>
   );
@@ -87,7 +103,7 @@ export function Sparkle({
       viewBox="0 0 16 16"
       aria-hidden="true"
       focusable="false"
-      className={`${animated ? "animate-twinkle motion-reduce:hidden" : ""} ${className}`}
+      className={`${animated ? "animate-twinkle motion-reduce:animate-none" : ""} ${className}`}
     >
       <path
         d="M8 0c.6 4.6 3.4 7.4 8 8-4.6.6-7.4 3.4-8 8-.6-4.6-3.4-7.4-8-8 4.6-.6 7.4-3.4 8-8Z"
