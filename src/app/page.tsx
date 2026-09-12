@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   Button,
   Cloud,
-  DialogBox,
   DottedFrame,
   FolderTab,
   RetroWindow,
@@ -39,56 +38,61 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={serviceSchema()} />
-      {/* Sky. Clouds mass into banks at the top and bottom edges, with a few
-          crossing the open middle in three parallax layers. Banks are sized per
-          breakpoint rather than CSS-scaled, so outline weight stays constant. */}
-      <section className="border-b-[2.5px] border-ink bg-coral">
-        <div className="relative h-72 overflow-hidden md:h-[26rem]">
-          <Sun size={56} animated className="absolute top-14 left-6 md:top-20 md:left-24" />
+      {/* Hero. The headline sits in the sky, on a cream panel so text stays
+          ink on cream. Clouds mass into banks at the top and bottom edges,
+          with a few crossing the middle in three parallax layers. Bank sizes
+          are set per breakpoint rather than CSS-scaled, so outline weight
+          stays constant. */}
+      <section className="relative border-b-[2.5px] border-ink bg-coral">
+        <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+          <Sun size={56} animated className="absolute top-6 left-6 md:top-24 md:left-auto md:right-28" />
 
-          {/* Top bank, flipped so the lobes hang downward. Anchored, so reduced motion keeps a full sky. */}
+          {/* Top bank, flipped so the lobes hang downward. */}
           <Cloud size="sm" shape="lumpy" flip animated className="absolute -top-8 -left-8 md:hidden" />
           <Cloud size="md" shape="peaked" flip animated delay={3} className="absolute -top-10 -right-10 md:hidden" />
           <Cloud size="lg" shape="lumpy" flip animated className="absolute -top-16 -left-12 hidden md:inline-flex" />
-          <Cloud size="md" shape="puff" flip animated delay={2} className="absolute -top-10 left-44 hidden md:inline-flex" />
-          <Cloud size="xl" shape="tall" flip animated delay={1} className="absolute -top-24 right-40 hidden lg:inline-flex" />
+          <Cloud size="md" shape="puff" flip animated delay={2} className="absolute -top-10 left-1/3 hidden md:inline-flex" />
+          <Cloud size="xl" shape="tall" flip animated delay={1} className="absolute -top-24 right-32 hidden lg:inline-flex" />
           <Cloud size="lg" shape="peaked" flip animated delay={3} className="absolute -top-14 -right-16 hidden md:inline-flex" />
 
           {/* Bottom bank, lobes up, cut off by the bottom edge. */}
           <Cloud size="md" shape="wide" animated delay={1.5} className="absolute -bottom-12 -left-10 md:hidden" />
           <Cloud size="sm" shape="tall" animated delay={3.5} className="absolute -bottom-8 right-4 md:hidden" />
           <Cloud size="xl" shape="wide" animated delay={1.5} className="absolute -bottom-20 -left-20 hidden md:inline-flex" />
-          <Cloud size="lg" shape="tall" animated delay={3.5} className="absolute -bottom-16 left-1/4 hidden lg:inline-flex" />
-          <Cloud size="xl" shape="lumpy" animated delay={0.5} className="absolute -bottom-24 left-1/2 hidden md:inline-flex" />
+          <Cloud size="lg" shape="tall" animated delay={3.5} className="absolute -bottom-16 left-1/3 hidden lg:inline-flex" />
+          <Cloud size="xl" shape="lumpy" animated delay={0.5} className="absolute -bottom-24 right-1/4 hidden md:inline-flex" />
           <Cloud size="lg" shape="puff" animated delay={2.5} className="absolute -bottom-14 -right-10 hidden md:inline-flex" />
 
-          {/* Crossing the open middle. Far layer small and slow, near layer big and quick. */}
-          <Cloud size="xs" shape="puff" drift={86} delay={26} className="absolute left-0 top-16 md:top-12" />
-          <Cloud size="xs" shape="wide" drift={80} delay={54} className="absolute left-0 top-36 hidden md:inline-flex" />
-          <Cloud size="sm" shape="lumpy" drift={74} delay={12} className="absolute left-0 top-28 md:top-24" />
-          <Cloud size="md" shape="peaked" drift={58} delay={40} className="absolute left-0 top-48 hidden md:inline-flex" animated />
-          <Cloud size="lg" shape="tall" drift={46} delay={22} className="absolute left-0 top-28 hidden lg:inline-flex" animated />
+          {/* Crossing the open sky. Far layer small and slow, near layer big and quick. */}
+          <Cloud size="xs" shape="puff" drift={86} delay={26} className="absolute left-0 top-10" />
+          <Cloud size="sm" shape="lumpy" drift={74} delay={12} className="absolute left-0 top-24 hidden md:inline-flex" />
+          <Cloud size="md" shape="peaked" drift={58} delay={40} className="absolute left-0 bottom-24 hidden lg:inline-flex" animated />
 
-          <Sparkle tone="cream" size={20} className="absolute top-20 left-1/2" animated />
-          <Sparkle tone="cream" size={14} className="absolute top-36 right-1/4" animated />
-          <Sparkle tone="cream" size={16} className="absolute bottom-28 left-14" animated />
-          <Sparkle tone="cream" size={12} className="hidden md:block absolute top-1/2 left-1/3" animated />
-          <Sparkle tone="gold" size={18} className="hidden md:block absolute bottom-32 right-28" animated />
-          <Sparkle tone="cream" size={15} className="hidden md:block absolute top-28 right-1/3" animated />
+          <Sparkle tone="cream" size={20} className="absolute top-16 right-1/3" animated />
+          <Sparkle tone="cream" size={14} className="absolute top-32 right-16" animated />
+          <Sparkle tone="gold" size={18} className="hidden md:block absolute bottom-24 right-1/4" animated />
+          <Sparkle tone="cream" size={15} className="hidden md:block absolute top-24 left-1/4" animated />
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-4 pt-24 pb-14 md:py-24">
+          <div className="grid max-w-3xl gap-6 outline-ink r-soft bg-cream p-6 shadow-[4px_4px_0_var(--ink)] md:p-9">
+            <h1 className="text-3xl font-bold leading-tight md:text-5xl">{c.headline}</h1>
+            <p className="max-w-prose text-lg">{c.subcopy}</p>
+            <div className="flex flex-wrap items-center gap-4 pt-1">
+              <Button as="link" href={site.cta.href} size="lg">
+                {site.cta.label}
+              </Button>
+              <Button as="link" href={faqAnchor} variant="ghost" size="lg">
+                {c.faqPreview.seeAll}
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
-      <div className="mx-auto flex max-w-7xl gap-8 px-4 py-8 md:py-12">
+      <div className="mx-auto flex max-w-7xl gap-8 px-4 py-10 md:py-14">
         <div className="flex min-w-0 flex-1 flex-col gap-14">
-      <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
-        <div className="flex flex-col gap-3">
-          <h1 className="text-3xl font-bold leading-tight md:text-5xl">{c.headline}</h1>
-          <p className="max-w-prose text-lg">{c.subcopy}</p>
-        </div>
-        <DialogBox prompt={c.dialog.prompt} yesHref={site.cta.href} noHref={faqAnchor} />
-      </div>
-
-      <HomeSearch />
+          <HomeSearch />
 
       {/* Credentials strip */}
       <section className="flex flex-col gap-4">
