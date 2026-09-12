@@ -163,6 +163,11 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    /* Drifting clouds are motion by definition. The anchored banks stay. */
+    .animate-drift {
+      display: none !important;
+    }
+
     *,
     *::before,
     *::after {
