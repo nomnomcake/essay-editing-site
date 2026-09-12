@@ -79,6 +79,11 @@ export function Gallery() {
           ))}
         </div>
       </header>
+      <p className="font-pixel text-[11px]">
+        <a href="/dev/design" className="focus-retro r-tight underline underline-offset-4">
+          {g.designKey}
+        </a>
+      </p>
 
       <Section title={g.sections.window}>
         <Both>

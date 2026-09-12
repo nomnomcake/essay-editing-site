@@ -13,7 +13,7 @@ export type { HeartRowProps } from "./HeartRow";
 export { SearchBar } from "./SearchBar";
 export type { SearchBarProps } from "./SearchBar";
 export { Cloud, Sparkle, Sun } from "./Decorations";
-export type { CloudProps, SparkleProps, SunProps } from "./Decorations";
+export type { CloudProps, CloudShape, SparkleProps, SunProps } from "./Decorations";
 export { Button, buttonClassName } from "./Button";
 export type { ButtonProps } from "./Button";
 export { Field } from "./Field";

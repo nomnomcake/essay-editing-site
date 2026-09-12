@@ -12,6 +12,7 @@ export const gallery = {
     error: "error",
   },
   desktop: "desktop",
+  designKey: "/dev/design",
   mobile: "375px",
   sections: {
     window: "1. RetroWindow",
