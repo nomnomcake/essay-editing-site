@@ -23,7 +23,6 @@ import {
 import {
   Bitter,
   Bricolage_Grotesque,
-  Courier_Prime,
   Crimson_Pro,
   IBM_Plex_Mono,
   Instrument_Serif,
@@ -56,11 +55,10 @@ const instrument = Instrument_Serif({ subsets: ["latin"], weight: "400", display
 const crimson = Crimson_Pro({ subsets: ["latin"], display: "swap" });
 const zilla = Zilla_Slab({ subsets: ["latin"], weight: ["400", "700"], display: "swap" });
 const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "600"], display: "swap" });
-const courier = Courier_Prime({ subsets: ["latin"], weight: ["400", "700"], display: "swap" });
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], display: "swap" });
 
 const FONT_OPTIONS = [
-  { name: "Fraunces ✓", className: "font-body" },
+  { name: "Courier Prime ✓", className: "font-body" },
   { name: "Newsreader", className: newsreader.className },
   { name: "Bitter", className: bitter.className },
   { name: "Lora", className: lora.className },
@@ -68,7 +66,6 @@ const FONT_OPTIONS = [
   { name: "Crimson Pro", className: crimson.className },
   { name: "Zilla Slab", className: zilla.className },
   { name: "IBM Plex Mono", className: plexMono.className },
-  { name: "Courier Prime", className: courier.className },
   { name: "Bricolage", className: bricolage.className },
 ];
 
@@ -81,8 +78,8 @@ const SUNS: { name: string; variant: SunVariant }[] = [
 ];
 
 const FOLDER_PATTERNS: { name: string; pattern: FolderPattern }[] = [
-  { name: "scallop ✓", pattern: "scallop" },
-  { name: "band", pattern: "band" },
+  { name: "band ✓", pattern: "band" },
+  { name: "scallop", pattern: "scallop" },
   { name: "dots", pattern: "dots" },
   { name: "none", pattern: "none" },
 ];

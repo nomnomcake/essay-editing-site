@@ -26,13 +26,15 @@ const tones: Record<FolderTone, { tab: string; fill: string }> = {
 export function FolderTab({
   label,
   tone = "gold",
-  pattern = "scallop",
+  pattern = "band",
   featured = false,
   className = "",
   children,
 }: FolderTabProps) {
   const t = tones[tone];
-  const insetTop = pattern === "scallop" || pattern === "band";
+  /* Clearance must match the fill height: band is 36px + 3px rule, scallop 40px. */
+  const topPad =
+    pattern === "band" ? "pt-12 md:pt-12" : pattern === "scallop" ? "pt-14 md:pt-15" : "pt-4 md:pt-5";
 
   return (
     <div className={`flex flex-col text-ink ${className}`}>
@@ -83,9 +85,7 @@ export function FolderTab({
 
         {/* Padding is per-side. A shorthand p-* in a breakpoint would override pt-* below it. */}
         <div
-          className={`relative px-4 pb-4 md:px-5 md:pb-5 ${
-            insetTop ? "pt-14 md:pt-16" : "pt-4 md:pt-5"
-          }`}
+          className={`relative px-4 pb-4 md:px-5 md:pb-5 ${topPad}`}
         >
           {children}
         </div>

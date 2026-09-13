@@ -17,7 +17,7 @@ export const key = {
       "Salmon is back as the accent.",
       "A coquette sun: scalloped disc, fine spokes, dotted tips.",
       "Buttons and inputs are squarer, inputs now sit sunken.",
-      "Ten new reading fonts, all serif, slab or typewriter. Fraunces applied.",
+      "Courier Prime is the reading font. A typewriter face for a service about editing drafts.",
     ],
     fontHeading: "body font, alternates",
     fontNote: "Every sans I offered before was rejected, so these are a different category: old-style serifs, slabs and typewriter monos. Silkscreen stays as the pixel display face throughout.",
@@ -41,7 +41,7 @@ export const key = {
       "The old sun was a plain gold disc, the least interesting shape in the set. Rayed is applied. All four use the same disc, so switching is one prop.",
     folderHeading: "folder tab fill, alternates",
     folderNote:
-      "The diagonal stripes are gone. Scallop is applied: a solid band with a row of half circles hanging off it. Band is a flat bar, dots is a halftone that fades out, none is clean cream.",
+      "The diagonal stripes are gone. Band is applied: a flat bar of the tone across the top of the card. Scallop hangs half circles off that bar, dots is a halftone that fades out, none is clean cream.",
     motionHeading: "slower motion",
     motionNote:
       "Slower again. A cloud now takes three to five minutes to cross, the bob runs at 16 seconds and the sun at 15.",
@@ -100,7 +100,7 @@ export const key = {
         sample: "window title / button",
       },
       {
-        name: "Fraunces",
+        name: "Courier Prime",
         variable: "--font-body",
         role: "Headings and all body copy. Everything a person actually reads.",
         className: "font-body",

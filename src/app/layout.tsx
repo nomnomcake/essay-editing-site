@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Silkscreen } from "next/font/google";
+import { Courier_Prime, Silkscreen } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/site/Footer";
 import { Shell } from "@/components/site/Shell";
@@ -13,8 +13,9 @@ const pixel = Silkscreen({
   display: "swap",
 });
 
-const body = Fraunces({
+const body = Courier_Prime({
   variable: "--font-body",
+  weight: ["400", "700"],
   subsets: ["latin"],
   display: "swap",
 });
