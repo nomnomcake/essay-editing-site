@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Silkscreen } from "next/font/google";
+import { Fraunces, Silkscreen } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/site/Footer";
 import { Shell } from "@/components/site/Shell";
@@ -13,7 +13,7 @@ const pixel = Silkscreen({
   display: "swap",
 });
 
-const body = Space_Grotesk({
+const body = Fraunces({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",

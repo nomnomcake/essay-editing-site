@@ -5,7 +5,7 @@ export type { DialogBoxProps } from "./DialogBox";
 export { DottedFrame } from "./DottedFrame";
 export type { DottedFrameProps } from "./DottedFrame";
 export { FolderTab } from "./FolderTab";
-export type { FolderTabProps, FolderTone } from "./FolderTab";
+export type { FolderTabProps, FolderTone, FolderPattern } from "./FolderTab";
 export { DocIcon } from "./DocIcon";
 export type { DocIconProps } from "./DocIcon";
 export { HeartRow } from "./HeartRow";

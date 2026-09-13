@@ -64,9 +64,9 @@ export default function HomePage() {
           <Cloud size="lg" shape="puff" animated delay={2.5} className="absolute -bottom-14 -right-10 hidden md:inline-flex" />
 
           {/* Crossing the open sky. Far layer small and slow, near layer big and quick. */}
-          <Cloud size="xs" shape="puff" drift={163} delay={49} className="absolute left-0 top-10" />
-          <Cloud size="sm" shape="lumpy" drift={141} delay={23} className="absolute left-0 top-24 hidden md:inline-flex" />
-          <Cloud size="md" shape="peaked" drift={110} delay={76} className="absolute left-0 bottom-24 hidden lg:inline-flex" animated />
+          <Cloud size="xs" shape="puff" drift={280} delay={85} className="absolute left-0 top-10" />
+          <Cloud size="sm" shape="lumpy" drift={240} delay={39} className="absolute left-0 top-24 hidden md:inline-flex" />
+          <Cloud size="md" shape="peaked" drift={190} delay={131} className="absolute left-0 bottom-24 hidden lg:inline-flex" animated />
 
           <Sparkle tone="cream" size={20} className="absolute top-16 right-1/3" animated />
           <Sparkle tone="cream" size={14} className="absolute top-32 right-16" animated />

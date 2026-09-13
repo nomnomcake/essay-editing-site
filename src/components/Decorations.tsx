@@ -139,11 +139,11 @@ export function Sparkle({
   );
 }
 
-export type SunVariant = "disc" | "rayed" | "banded" | "spoked";
+export type SunVariant = "coquette" | "disc" | "rayed" | "banded" | "spoked";
 
 export interface SunProps {
   size?: number;
-  /** Four suns. "rayed" is the default; "disc" is the original plain circle. */
+  /** Five suns. "coquette" is the default; "disc" is the original plain circle. */
   variant?: SunVariant;
   /** Slow pulse. Stops under prefers-reduced-motion. */
   animated?: boolean;
@@ -187,6 +187,43 @@ const BANDS = [-6, 0, 6, 12]
   })
   .join("");
 
+/**
+ * Coquette sun: a scalloped daisy disc with fine spokes of alternating length
+ * and a small dot on every long one.
+ */
+const SCALLOP_R = 13;
+const SCALLOP_N = 12;
+
+const SCALLOP = (() => {
+  const step = (Math.PI * 2) / SCALLOP_N;
+  const rr = ((2 * SCALLOP_R * Math.sin(step / 2)) / 2).toFixed(2);
+  const pt = (a: number) =>
+    `${(CX + SCALLOP_R * Math.cos(a)).toFixed(2)} ${(CY + SCALLOP_R * Math.sin(a)).toFixed(2)}`;
+  let d = `M${pt(0)}`;
+  for (let i = 1; i <= SCALLOP_N; i++) d += `A${rr} ${rr} 0 0 1 ${pt(i * step)}`;
+  return d + "Z";
+})();
+
+const FINE_SPOKES = (() => {
+  let d = "";
+  for (let i = 0; i < 12; i++) {
+    const a = (i * Math.PI * 2) / 12;
+    const outer = i % 2 === 0 ? 25 : 20;
+    const p = (r: number) =>
+      `${(CX + r * Math.cos(a)).toFixed(2)} ${(CY + r * Math.sin(a)).toFixed(2)}`;
+    d += `M${p(16)}L${p(outer)}`;
+  }
+  return d;
+})();
+
+const SPOKE_DOTS = Array.from({ length: 6 }, (_, k) => {
+  const a = (k * Math.PI * 2) / 6;
+  return {
+    cx: Number((CX + 27.6 * Math.cos(a)).toFixed(2)),
+    cy: Number((CY + 27.6 * Math.sin(a)).toFixed(2)),
+  };
+});
+
 const stroke = {
   stroke: "var(--ink)",
   strokeWidth: 3,
@@ -196,7 +233,7 @@ const stroke = {
 };
 
 /** The sun for sky panels. Decorative. */
-export function Sun({ size = 32, variant = "rayed", animated = false, className = "" }: SunProps) {
+export function Sun({ size = 32, variant = "coquette", animated = false, className = "" }: SunProps) {
   return (
     <svg
       width={size}
@@ -206,9 +243,18 @@ export function Sun({ size = 32, variant = "rayed", animated = false, className 
       focusable="false"
       className={`${animated ? "animate-float-slow motion-reduce:animate-none" : ""} ${className}`}
     >
+      {variant === "coquette" ? (
+        <>
+          <path d={FINE_SPOKES} fill="none" {...stroke} strokeWidth={2} />
+          {SPOKE_DOTS.map((d) => (
+            <circle key={`${d.cx}-${d.cy}`} cx={d.cx} cy={d.cy} r={1.9} fill="var(--gold)" {...stroke} strokeWidth={2} />
+          ))}
+          <path d={SCALLOP} fill="var(--gold)" {...stroke} />
+        </>
+      ) : null}
       {variant === "rayed" ? <path d={RAYS} fill="var(--gold)" {...stroke} /> : null}
       {variant === "spoked" ? <path d={SPOKES} fill="none" {...stroke} /> : null}
-      <circle cx={CX} cy={CY} r={R} fill="var(--gold)" {...stroke} />
+      {variant === "coquette" ? null : <circle cx={CX} cy={CY} r={R} fill="var(--gold)" {...stroke} />}
       {variant === "banded" ? <path d={BANDS} fill="none" {...stroke} strokeWidth={2.5} /> : null}
     </svg>
   );

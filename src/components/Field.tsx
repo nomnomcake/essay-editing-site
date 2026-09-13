@@ -63,7 +63,7 @@ export type FieldProps =
   | RadioFieldProps;
 
 const control =
-  "focus-retro w-full outline-ink r-tight bg-cream px-3 py-2.5 font-body text-base text-ink placeholder:text-ink/50 disabled:opacity-50 aria-[invalid=true]:border-accent-deep";
+  "focus-retro inset-flat w-full outline-ink r-tight bg-cream px-3 py-2.5 font-body text-base text-ink placeholder:text-ink/50 disabled:opacity-50 aria-[invalid=true]:border-accent-deep";
 
 /** The one form atom. Use for every input, textarea, select and radio group so labels, help and errors stay consistent. */
 export const Field = forwardRef<
@@ -119,7 +119,7 @@ export const Field = forwardRef<
               <label
                 key={o.value}
                 htmlFor={oid}
-                className="flex cursor-pointer items-start gap-3 outline-ink r-tight bg-cream px-3 py-2.5 has-checked:bg-peach-bg has-focus-visible:outline-2 has-focus-visible:outline-dashed has-focus-visible:outline-offset-2 has-focus-visible:outline-ink"
+                className="inset-flat flex cursor-pointer items-start gap-3 outline-ink r-tight bg-cream px-3 py-2.5 has-checked:bg-peach-bg has-focus-visible:outline-2 has-focus-visible:outline-dashed has-focus-visible:outline-offset-2 has-focus-visible:outline-ink"
               >
                 <input
                   {...rest}

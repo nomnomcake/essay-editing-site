@@ -18,17 +18,18 @@ import {
   Sun,
   type CloudShape,
   type SunVariant,
+  type FolderPattern,
 } from "@/components";
 import {
-  DM_Sans,
-  Fredoka,
-  Karla,
-  Nunito,
-  Outfit,
-  Plus_Jakarta_Sans,
-  Quicksand,
-  Rubik,
-  Work_Sans,
+  Bitter,
+  Bricolage_Grotesque,
+  Courier_Prime,
+  Crimson_Pro,
+  IBM_Plex_Mono,
+  Instrument_Serif,
+  Lora,
+  Newsreader,
+  Zilla_Slab,
 } from "next/font/google";
 import {
   BookIcon,
@@ -48,34 +49,42 @@ import {
 import { key } from "./copy";
 
 /* Candidate reading fonts. Imported here only, so they never load on the public site. */
-const fredoka = Fredoka({ subsets: ["latin"], display: "swap" });
-const workSans = Work_Sans({ subsets: ["latin"], display: "swap" });
-const nunito = Nunito({ subsets: ["latin"], display: "swap" });
-const dmSans = DM_Sans({ subsets: ["latin"], display: "swap" });
-const outfit = Outfit({ subsets: ["latin"], display: "swap" });
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], display: "swap" });
-const quicksand = Quicksand({ subsets: ["latin"], display: "swap" });
-const rubik = Rubik({ subsets: ["latin"], display: "swap" });
-const karla = Karla({ subsets: ["latin"], display: "swap" });
+const newsreader = Newsreader({ subsets: ["latin"], display: "swap" });
+const bitter = Bitter({ subsets: ["latin"], display: "swap" });
+const lora = Lora({ subsets: ["latin"], display: "swap" });
+const instrument = Instrument_Serif({ subsets: ["latin"], weight: "400", display: "swap" });
+const crimson = Crimson_Pro({ subsets: ["latin"], display: "swap" });
+const zilla = Zilla_Slab({ subsets: ["latin"], weight: ["400", "700"], display: "swap" });
+const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "600"], display: "swap" });
+const courier = Courier_Prime({ subsets: ["latin"], weight: ["400", "700"], display: "swap" });
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"], display: "swap" });
 
 const FONT_OPTIONS = [
-  { name: "Space Grotesk ✓", className: "font-body" },
-  { name: "Fredoka", className: fredoka.className },
-  { name: "Work Sans", className: workSans.className },
-  { name: "DM Sans", className: dmSans.className },
-  { name: "Outfit", className: outfit.className },
-  { name: "Plus Jakarta", className: jakarta.className },
-  { name: "Quicksand", className: quicksand.className },
-  { name: "Rubik", className: rubik.className },
-  { name: "Karla", className: karla.className },
-  { name: "Nunito (was)", className: nunito.className },
+  { name: "Fraunces ✓", className: "font-body" },
+  { name: "Newsreader", className: newsreader.className },
+  { name: "Bitter", className: bitter.className },
+  { name: "Lora", className: lora.className },
+  { name: "Instrument Serif", className: instrument.className },
+  { name: "Crimson Pro", className: crimson.className },
+  { name: "Zilla Slab", className: zilla.className },
+  { name: "IBM Plex Mono", className: plexMono.className },
+  { name: "Courier Prime", className: courier.className },
+  { name: "Bricolage", className: bricolage.className },
 ];
 
 const SUNS: { name: string; variant: SunVariant }[] = [
-  { name: "rayed ✓", variant: "rayed" },
-  { name: "banded", variant: "banded" },
+  { name: "coquette ✓", variant: "coquette" },
   { name: "spoked", variant: "spoked" },
+  { name: "rayed", variant: "rayed" },
+  { name: "banded", variant: "banded" },
   { name: "disc (was)", variant: "disc" },
+];
+
+const FOLDER_PATTERNS: { name: string; pattern: FolderPattern }[] = [
+  { name: "scallop ✓", pattern: "scallop" },
+  { name: "band", pattern: "band" },
+  { name: "dots", pattern: "dots" },
+  { name: "none", pattern: "none" },
 ];
 
 const ICONS = [
@@ -226,10 +235,10 @@ export default function DesignKeyPage() {
               <h3 className="font-pixel text-xs">{key.review.sunHeading}</h3>
               <p className="text-sm">{key.review.sunNote}</p>
             </div>
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-5 gap-2">
               {SUNS.map((s) => (
                 <figure key={s.variant} className="flex flex-col items-center gap-2 r-tight bg-accent p-3">
-                  <Sun size={52} variant={s.variant} />
+                  <Sun size={46} variant={s.variant} />
                   <figcaption className="text-center font-pixel text-[10px]">{s.name}</figcaption>
                 </figure>
               ))}
@@ -242,6 +251,20 @@ export default function DesignKeyPage() {
               <p className="text-sm">{key.review.motionNote}</p>
             </div>
           </DottedFrame>
+        </div>
+
+        <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-4">
+          <div className="flex flex-col gap-1">
+            <h3 className="font-pixel text-xs">{key.review.folderHeading}</h3>
+            <p className="text-sm">{key.review.folderNote}</p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {FOLDER_PATTERNS.map((f) => (
+              <FolderTab key={f.pattern} label={f.name} tone="accent" pattern={f.pattern}>
+                <p className="text-sm">Card body.</p>
+              </FolderTab>
+            ))}
+          </div>
         </div>
       </Section>
 
