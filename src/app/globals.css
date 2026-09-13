@@ -9,8 +9,8 @@
   --peach-bg: #fbe3d8; /* page background */
   --cream: #fff9f4; /* card fill */
   --ink: #5a3a34; /* every outline, every piece of body text */
-  --accent: #8fbcaa; /* sky, primary CTA fill. Was salmon #e89a94. */
-  --accent-deep: #74a290; /* primary hover, inline error text */
+  --accent: #c0a8db; /* sky, primary CTA fill */
+  --accent-deep: #a98fc9; /* primary hover, inline error text */
   --periwinkle: #b9c6e8; /* secondary buttons, icon fills */
   --gold: #f2c879; /* stars, sun, highlights */
 
@@ -115,23 +115,23 @@
 }
 
 @utility animate-bob {
-  animation: bob 7s ease-in-out infinite;
+  animation: bob 12s ease-in-out infinite;
 }
 
 @utility animate-float {
-  animation: bob 7s ease-in-out infinite;
+  animation: bob 12s ease-in-out infinite;
 }
 
 @utility animate-float-slow {
-  animation: pulse-sun 9s ease-in-out infinite;
+  animation: pulse-sun 15s ease-in-out infinite;
 }
 
 @utility animate-drift {
-  animation: drift 80s linear infinite;
+  animation: drift 150s linear infinite;
 }
 
 @utility animate-twinkle {
-  animation: twinkle 3s ease-in-out infinite;
+  animation: twinkle 4.5s ease-in-out infinite;
   &:nth-child(2n) {
     animation-delay: -1s;
   }

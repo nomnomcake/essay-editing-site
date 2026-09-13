@@ -139,25 +139,77 @@ export function Sparkle({
   );
 }
 
+export type SunVariant = "disc" | "rayed" | "banded" | "spoked";
+
 export interface SunProps {
   size?: number;
-  /** Slow bob. Hidden under prefers-reduced-motion. */
+  /** Four suns. "rayed" is the default; "disc" is the original plain circle. */
+  variant?: SunVariant;
+  /** Slow pulse. Stops under prefers-reduced-motion. */
   animated?: boolean;
   className?: string;
 }
 
-/** Small gold disc for sky panels. Decorative. */
-export function Sun({ size = 32, animated = false, className = "" }: SunProps) {
+/* Geometry is computed once at module load, not per render. */
+const CX = 32;
+const CY = 32;
+const R = 15;
+
+/** Eight triangular rays sitting just outside the disc. */
+const RAYS = Array.from({ length: 8 }, (_, i) => {
+  const a = (i * Math.PI) / 4;
+  const spread = 0.17;
+  const inner = R + 3;
+  const outer = R + 13;
+  const p = (rad: number, ang: number) =>
+    `${(CX + rad * Math.cos(ang)).toFixed(1)} ${(CY + rad * Math.sin(ang)).toFixed(1)}`;
+  return `M${p(inner, a - spread)}L${p(outer, a)}L${p(inner, a + spread)}Z`;
+}).join("");
+
+/** Eight thin spokes radiating from the disc. */
+const SPOKES = Array.from({ length: 8 }, (_, i) => {
+  const a = (i * Math.PI) / 4;
+  const p = (rad: number) =>
+    `${(CX + rad * Math.cos(a)).toFixed(1)} ${(CY + rad * Math.sin(a)).toFixed(1)}`;
+  return `M${p(R + 4)}L${p(R + 12)}`;
+}).join("");
+
+/**
+ * Horizontal bands across the disc. Each line is trimmed to the circle's
+ * width at that height, so no clip path or generated id is needed.
+ */
+const BANDS = [-6, 0, 6, 12]
+  .map((dy) => {
+    const halfWidth = Math.sqrt(Math.max(R * R - dy * dy, 0)) - 1.5;
+    if (halfWidth <= 1) return "";
+    const y = (CY + dy).toFixed(1);
+    return `M${(CX - halfWidth).toFixed(1)} ${y}H${(CX + halfWidth).toFixed(1)}`;
+  })
+  .join("");
+
+const stroke = {
+  stroke: "var(--ink)",
+  strokeWidth: 3,
+  strokeLinejoin: "round" as const,
+  strokeLinecap: "round" as const,
+  vectorEffect: "non-scaling-stroke" as const,
+};
+
+/** The sun for sky panels. Decorative. */
+export function Sun({ size = 32, variant = "rayed", animated = false, className = "" }: SunProps) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 32 32"
+      viewBox="0 0 64 64"
       aria-hidden="true"
       focusable="false"
       className={`${animated ? "animate-float-slow motion-reduce:animate-none" : ""} ${className}`}
     >
-      <circle cx="16" cy="16" r="13" fill="var(--gold)" stroke="var(--ink)" strokeWidth="2.5" />
+      {variant === "rayed" ? <path d={RAYS} fill="var(--gold)" {...stroke} /> : null}
+      {variant === "spoked" ? <path d={SPOKES} fill="none" {...stroke} /> : null}
+      <circle cx={CX} cy={CY} r={R} fill="var(--gold)" {...stroke} />
+      {variant === "banded" ? <path d={BANDS} fill="none" {...stroke} strokeWidth={2.5} /> : null}
     </svg>
   );
 }
