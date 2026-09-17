@@ -66,7 +66,7 @@ export function Shell({ children }: { children: ReactNode }) {
         {/* The page */}
         <main
           id={MAIN_ID}
-          className="min-h-0 flex-1 overflow-y-auto bg-peach-bg [background-image:linear-gradient(to_right,rgb(90_58_52/0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgb(90_58_52/0.07)_1px,transparent_1px)] [background-size:28px_28px]"
+          className="min-h-0 flex-1 overflow-y-auto bg-peach-bg [background-image:linear-gradient(to_right,color-mix(in_srgb,var(--ink)_7%,transparent)_1px,transparent_1px),linear-gradient(to_bottom,color-mix(in_srgb,var(--ink)_7%,transparent)_1px,transparent_1px)] [background-size:28px_28px]"
         >
           {children}
         </main>

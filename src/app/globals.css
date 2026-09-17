@@ -8,7 +8,7 @@
 :root {
   --peach-bg: #fbe3d8; /* page background */
   --cream: #fff9f4; /* card fill */
-  --ink: #5a3a34; /* every outline, every piece of body text */
+  --ink: #4a2e29; /* every outline, every piece of body text */
   --accent: #e89a94; /* salmon. sky, primary CTA fill */
   --accent-deep: #d97b77; /* primary hover, inline error text */
   --periwinkle: #b9c6e8; /* secondary buttons, icon fills */
@@ -157,20 +157,20 @@
 
 /* Halftone dither, for shading a panel without introducing a new colour. */
 @utility dither {
-  background-image: radial-gradient(rgb(90 58 52 / 0.3) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 30%, transparent) 1.2px, transparent 1.2px);
   background-size: 6px 6px;
 }
 
 /* Sunken control, the way an old dialog drew an input. */
 @utility inset-flat {
-  box-shadow: inset 3px 3px 0 rgb(90 58 52 / 0.13);
+  box-shadow: inset 3px 3px 0 color-mix(in srgb, var(--ink) 13%, transparent);
 }
 
 /* Diagonal hatch, for inert or disabled surfaces. */
 @utility hatch-ink {
   background-image: repeating-linear-gradient(
     45deg,
-    rgb(90 58 52 / 0.18) 0 2px,
+    color-mix(in srgb, var(--ink) 18%, transparent) 0 2px,
     transparent 2px 7px
   );
 }
@@ -188,6 +188,15 @@
     color: var(--ink);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Courier Prime is monospace, which needs more leading than a proportional
+     face to stay readable at length. Headings and labels keep their own. */
+  p,
+  li,
+  dd,
+  blockquote {
+    line-height: 1.7;
   }
 
   /* Real controls get real focus rings. */
