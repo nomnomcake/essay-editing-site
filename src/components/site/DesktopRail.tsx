@@ -51,7 +51,7 @@ export function DesktopRail() {
         <span>{c.star}</span>
       </Link>
 
-      <Cloud size="md" animated className="block" />
+      <Cloud size="md" className="block" />
     </aside>
   );
 }

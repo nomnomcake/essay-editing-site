@@ -39,7 +39,7 @@ export function FolderTab({
   return (
     <div className={`flex flex-col text-ink ${className}`}>
       <div
-        className={`-mb-[3px] ml-3 inline-flex w-fit max-w-[80%] outline-ink r-tight rounded-b-none border-b-0 px-3 py-1 font-pixel text-xs ${t.tab}`}
+        className={`-mb-[3px] ml-3 inline-flex w-fit max-w-[80%] outline-ink r-tab rounded-b-none border-b-0 px-3 py-1 font-pixel text-xs ${t.tab}`}
       >
         <span className="truncate">{label}</span>
       </div>

@@ -15,9 +15,7 @@ import {
   RetroWindow,
   Sparkle,
   StarIcon,
-  Sun,
-  type CloudShape,
-  type SunVariant,
+  Moon,
   type FolderPattern,
 } from "@/components";
 import {
@@ -67,14 +65,6 @@ const FONT_OPTIONS = [
   { name: "Zilla Slab", className: zilla.className },
   { name: "IBM Plex Mono", className: plexMono.className },
   { name: "Bricolage", className: bricolage.className },
-];
-
-const SUNS: { name: string; variant: SunVariant }[] = [
-  { name: "coquette ✓", variant: "coquette" },
-  { name: "spoked", variant: "spoked" },
-  { name: "rayed", variant: "rayed" },
-  { name: "banded", variant: "banded" },
-  { name: "disc (was)", variant: "disc" },
 ];
 
 const FOLDER_PATTERNS: { name: string; pattern: FolderPattern }[] = [
@@ -149,8 +139,6 @@ function Specimen({ label, note, children }: { label: string; note?: string; chi
   );
 }
 
-const CLOUD_SHAPES: CloudShape[] = ["tall", "wide", "peaked", "lumpy", "puff"];
-
 export default function DesignKeyPage() {
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-14 px-4 py-10 md:py-14">
@@ -200,9 +188,9 @@ export default function DesignKeyPage() {
                   className="relative h-28 overflow-hidden outline-ink r-tight"
                   style={{ background: a.hex }}
                 >
-                  <Cloud size="xs" shape="lumpy" flip className="absolute -top-3 -left-2" />
-                  <Cloud size="sm" shape="tall" className="absolute -bottom-4 right-0" />
-                  <Sun size={20} className="absolute top-3 right-4" />
+                  <Cloud size="xs" className="absolute -top-3 -left-2" />
+                  <Cloud size="sm" className="absolute -bottom-4 right-0" />
+                  <Moon size={24} />
                 </div>
                 <figcaption className="flex flex-col gap-1">
                   <span className="font-pixel text-[10px]">
@@ -232,13 +220,10 @@ export default function DesignKeyPage() {
               <h3 className="font-pixel text-xs">{key.review.sunHeading}</h3>
               <p className="text-sm">{key.review.sunNote}</p>
             </div>
-            <div className="grid grid-cols-5 gap-2">
-              {SUNS.map((s) => (
-                <figure key={s.variant} className="flex flex-col items-center gap-2 r-tight bg-accent p-3">
-                  <Sun size={46} variant={s.variant} />
-                  <figcaption className="text-center font-pixel text-[10px]">{s.name}</figcaption>
-                </figure>
-              ))}
+            <div className="flex items-center gap-6 r-tight bg-night p-4">
+              <Moon size={56} withStar />
+              <Sparkle size={30} />
+              <Sparkle size={22} tone="gold" />
             </div>
           </div>
 
@@ -332,7 +317,7 @@ export default function DesignKeyPage() {
         <div className="flex flex-wrap items-end gap-6 outline-ink r-soft bg-cream p-4">
           <span className="outline-ink r-soft bg-peach-bg px-4 py-3 font-pixel text-[10px]">r-soft</span>
           <span className="outline-ink r-tight bg-peach-bg px-4 py-3 font-pixel text-[10px]">r-tight</span>
-          <span className="outline-ink r-tight bg-accent px-4 py-3 font-pixel text-[10px] shadow-flat">shadow-flat</span>
+          <span className="outline-ink r-tight bg-night px-4 py-3 font-pixel text-[10px] shadow-flat">shadow-flat</span>
           <button type="button" className="focus-retro outline-ink r-tight bg-periwinkle px-4 py-3 font-pixel text-[10px]">
             focus-retro (tab to me)
           </button>
@@ -341,10 +326,10 @@ export default function DesignKeyPage() {
           <div className="flex flex-col gap-3 p-2">
             <h3 className="font-pixel text-xs">{key.form.strokeHeading}</h3>
             <p className="max-w-prose">{key.form.strokeNote}</p>
-            <div className="flex flex-wrap items-end gap-4 r-tight bg-accent p-4">
-              <Cloud size="xs" shape="puff" />
-              <Cloud size="sm" shape="lumpy" />
-              <Cloud size="md" shape="tall" />
+            <div className="flex flex-wrap items-end gap-4 r-tight bg-night p-4">
+              <Cloud size="xs" />
+              <Cloud size="sm" />
+              <Cloud size="md" />
             </div>
           </div>
         </DottedFrame>
@@ -438,13 +423,10 @@ export default function DesignKeyPage() {
       <Section heading={key.clouds.heading} source={key.clouds.source} note={key.clouds.note}>
         <div className="flex flex-col gap-4 outline-ink r-soft bg-cream p-4">
           <h3 className="font-pixel text-xs">{key.clouds.shapeLabel}</h3>
-          <div className="flex flex-wrap items-end gap-6 r-tight bg-accent p-5">
-            {CLOUD_SHAPES.map((s) => (
-              <figure key={s} className="flex flex-col items-center gap-2">
-                <Cloud size="sm" shape={s} />
-                <figcaption className="font-pixel text-[10px]">{s}</figcaption>
-              </figure>
-            ))}
+          <div className="flex flex-wrap items-end gap-6 r-tight bg-night p-5">
+            <Cloud size="xs" />
+            <Cloud size="sm" />
+            <Cloud size="md" />
           </div>
           <p className="font-pixel text-[10px]">{key.clouds.sizes}</p>
         </div>
@@ -453,13 +435,13 @@ export default function DesignKeyPage() {
           <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-4">
             <h3 className="font-pixel text-xs">{key.clouds.flipHeading}</h3>
             <p className="text-sm">{key.clouds.flipNote}</p>
-            <div className="flex items-end gap-6 r-tight bg-accent p-5">
+            <div className="flex items-end gap-6 r-tight bg-night p-5">
               <figure className="flex flex-col items-center gap-2">
-                <Cloud size="sm" shape="lumpy" />
+                <Cloud size="sm" />
                 <figcaption className="font-pixel text-[10px]">default</figcaption>
               </figure>
               <figure className="flex flex-col items-center gap-2">
-                <Cloud size="sm" shape="lumpy" flip />
+                <Cloud size="sm" />
                 <figcaption className="font-pixel text-[10px]">flip</figcaption>
               </figure>
             </div>
@@ -468,12 +450,12 @@ export default function DesignKeyPage() {
           <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-4">
             <h3 className="font-pixel text-xs">{key.clouds.banksHeading}</h3>
             <p className="text-sm">{key.clouds.banksNote}</p>
-            <div className="relative h-40 overflow-hidden r-tight bg-accent">
-              <Sun size={28} className="absolute top-4 right-6" />
-              <Cloud size="sm" shape="lumpy" flip className="absolute -top-4 -left-4" />
-              <Cloud size="xs" shape="puff" flip className="absolute -top-2 left-24" />
-              <Cloud size="md" shape="wide" className="absolute -bottom-8 -left-6" />
-              <Cloud size="sm" shape="tall" className="absolute -bottom-6 right-4" />
+            <div className="relative h-40 overflow-hidden r-tight bg-night">
+              <Moon size={30} />
+              <Cloud size="sm" className="absolute -top-4 -left-4" />
+              <Cloud size="xs" className="absolute -top-2 left-24" />
+              <Cloud size="md" className="absolute -bottom-8 -left-6" />
+              <Cloud size="sm" className="absolute -bottom-6 right-4" />
             </div>
           </div>
         </div>
@@ -506,10 +488,10 @@ export default function DesignKeyPage() {
           <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-4">
             <h3 className="font-pixel text-xs">{key.motion.parallaxHeading}</h3>
             <p className="text-sm">{key.motion.parallaxNote}</p>
-            <div className="relative h-32 overflow-hidden r-tight bg-accent">
-              <Cloud size="xs" shape="puff" drift={55} delay={9} className="absolute left-0 top-3" />
-              <Cloud size="sm" shape="wide" drift={38} delay={15} className="absolute left-0 top-12" />
-              <Cloud size="md" shape="tall" drift={26} delay={6} className="absolute left-0 bottom-0" />
+            <div className="relative h-32 overflow-hidden r-tight bg-night">
+              <Cloud size="xs" drift={55} delay={9} className="absolute left-0 top-3" />
+              <Cloud size="sm" drift={38} delay={15} className="absolute left-0 top-12" />
+              <Cloud size="md" drift={26} delay={6} className="absolute left-0 bottom-0" />
             </div>
           </div>
 

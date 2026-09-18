@@ -1,14 +1,10 @@
-export type CloudShape = "tall" | "wide" | "peaked" | "lumpy" | "puff";
-
 export interface CloudProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl";
-  /** Five silhouettes, so a sky never repeats one shape. */
-  shape?: CloudShape;
-  /** Turn the cloud upside down so its lobes face downward. For banks hanging from a top edge, where a flat base would read as a straight bar. */
-  flip?: boolean;
-  /** Gentle bob and squash. Stops under prefers-reduced-motion. */
-  animated?: boolean;
-  /** Seconds for one pass across the sky, left to right. Hidden under prefers-reduced-motion. */
+  /**
+   * Seconds for one pass across the sky, left to right. This is the only
+   * animation a cloud has. Without it the cloud is simply static, which is
+   * also what people with prefers-reduced-motion see.
+   */
   drift?: number;
   /** Seconds of negative delay, so a cloud starts part-way through its pass. */
   delay?: number;
@@ -24,55 +20,29 @@ const cloudWidths: Record<NonNullable<CloudProps["size"]>, number> = {
 };
 
 /**
- * Every lobe is a true circular arc on a flat base. Five silhouettes with
- * different lobe counts and profiles so a cloudscape does not read as one
- * stamp repeated.
+ * One silhouette, used everywhere. Five bumps on a softly rounded base, with
+ * two inner arcs that read as overlapping puffs.
  */
-const shapes: Record<CloudShape, string> = {
-  tall: "M12 80a22 22 0 0 1 10-32 26 26 0 0 1 30-30 34 34 0 0 1 56 6 24 24 0 0 1 26 22 20 20 0 0 1 14 34Z",
-  wide: "M20 80a24 24 0 0 1-2-28 26 26 0 0 1 38-24 30 30 0 0 1 50 6 24 24 0 0 1 30 18 22 22 0 0 1 2 28Z",
-  peaked: "M10 80a26 26 0 0 1 14-36 30 30 0 0 1 42-22 22 22 0 0 1 34 18 26 26 0 0 1 34 16 18 18 0 0 1 12 24Z",
-  lumpy:
-    "M8 80a18 18 0 0 1 8-26 20 20 0 0 1 26-16 22 22 0 0 1 30-6 24 24 0 0 1 34 8 20 20 0 0 1 26 14 16 16 0 0 1 12 26Z",
-  puff: "M24 80a22 22 0 0 1 4-30 26 26 0 0 1 44-10 24 24 0 0 1 34 18 20 20 0 0 1 14 22Z",
+const CLOUD =
+  "M16 72a20 20 0 0 1 6-28 26 26 0 0 1 34-20 30 30 0 0 1 48 6 22 22 0 0 1 26 20 18 18 0 0 1 8 22A120 120 0 0 1 16 72Z";
+const CLOUD_DETAIL = "M30 68a16 16 0 0 1 18-12M62 70a20 20 0 0 1 24-16";
+
+const line = {
+  stroke: "var(--sky-line)",
+  strokeLinejoin: "round" as const,
+  strokeLinecap: "round" as const,
+  vectorEffect: "non-scaling-stroke" as const,
 };
 
-/**
- * Cumulus cloud. The outline uses non-scaling-stroke so its weight stays the
- * same on screen at every size, the way a flat illustration is drawn.
- * Decorative only.
- */
-export function Cloud({
-  size = "md",
-  shape = "tall",
-  flip = false,
-  animated = false,
-  drift,
-  delay = 0,
-  className = "",
-}: CloudProps) {
+/** Cloud for the night sky. Decorative. */
+export function Cloud({ size = "md", drift, delay = 0, className = "" }: CloudProps) {
   const w = cloudWidths[size];
   const h = Math.round((w * 90) / 160);
 
   const svg = (
-    <svg
-      width={w}
-      height={h}
-      viewBox="0 0 160 90"
-      aria-hidden="true"
-      focusable="false"
-      className={animated ? "animate-bob" : undefined}
-      style={animated ? { animationDelay: `${-delay}s` } : undefined}
-    >
-      <path
-        d={shapes[shape]}
-        fill="#ffffff"
-        stroke="var(--ink)"
-        strokeWidth="3.5"
-        strokeLinejoin="round"
-        vectorEffect="non-scaling-stroke"
-        transform={flip ? "translate(0,90) scale(1,-1)" : undefined}
-      />
+    <svg width={w} height={h} viewBox="0 0 160 90" aria-hidden="true" focusable="false">
+      <path d={CLOUD} fill="var(--cloud)" strokeWidth="4" {...line} />
+      <path d={CLOUD_DETAIL} fill="none" strokeWidth="3" {...line} />
     </svg>
   );
 
@@ -89,10 +59,7 @@ export function Cloud({
   }
 
   return (
-    <span
-      aria-hidden="true"
-      className={`${animated ? "motion-reduce:[&_svg]:animate-none" : ""} ${className}`}
-    >
+    <span aria-hidden="true" className={className}>
       {svg}
     </span>
   );
@@ -100,22 +67,20 @@ export function Cloud({
 
 export interface SparkleProps {
   size?: number;
-  tone?: "ink" | "gold" | "cream";
-  /** Twinkle. Hidden entirely under prefers-reduced-motion. */
+  tone?: "cream" | "gold";
+  /** Twinkle in place. Stops under prefers-reduced-motion. */
   animated?: boolean;
   className?: string;
 }
 
-const sparkleFills: Record<NonNullable<SparkleProps["tone"]>, string> = {
-  ink: "var(--ink)",
-  gold: "var(--gold)",
-  cream: "var(--cream)",
-};
+/** Four-point star with concave sides, drawn to the badge reference. */
+const STAR =
+  "M32 3c2.5 16 10.5 24 26.5 26.5C42.5 32 34.5 40 32 56 29.5 40 21.5 32 5.5 29.5 21.5 27 29.5 19 32 3Z";
 
-/** Use as a small accent near headings or in sky panels. Never carries meaning. */
+/** Star for the night sky and for small accents beside headings. Decorative. */
 export function Sparkle({
   size = 16,
-  tone = "ink",
+  tone = "cream",
   animated = false,
   className = "",
 }: SparkleProps) {
@@ -123,117 +88,40 @@ export function Sparkle({
     <svg
       width={size}
       height={size}
-      viewBox="0 0 16 16"
+      viewBox="0 0 64 64"
       aria-hidden="true"
       focusable="false"
       className={`${animated ? "animate-twinkle motion-reduce:animate-none" : ""} ${className}`}
     >
       <path
-        d="M8 0c.6 4.6 3.4 7.4 8 8-4.6.6-7.4 3.4-8 8-.6-4.6-3.4-7.4-8-8 4.6-.6 7.4-3.4 8-8Z"
-        fill={sparkleFills[tone]}
-        stroke={tone === "ink" ? "none" : "var(--ink)"}
-        strokeWidth={tone === "ink" ? 0 : 1.5}
-        strokeLinejoin="round"
+        d={STAR}
+        fill={tone === "gold" ? "var(--gold)" : "var(--cloud)"}
+        strokeWidth="3.5"
+        {...line}
       />
     </svg>
   );
 }
 
-export type SunVariant = "coquette" | "disc" | "rayed" | "banded" | "spoked";
-
-export interface SunProps {
+export interface MoonProps {
   size?: number;
-  /** Five suns. "coquette" is the default; "disc" is the original plain circle. */
-  variant?: SunVariant;
-  /** Slow pulse. Stops under prefers-reduced-motion. */
+  /** Adds a small star beside the crescent. */
+  withStar?: boolean;
+  /** Slow glow. Stops under prefers-reduced-motion. */
   animated?: boolean;
   className?: string;
 }
 
-/* Geometry is computed once at module load, not per render. */
-const CX = 32;
-const CY = 32;
-const R = 15;
+/** Crescent: the outer disc with an offset disc carved out of it. */
+const CRESCENT = "M30.04 6.07A26 26 0 1 0 53.34 46.85 24 24 0 1 1 30.04 6.07Z";
 
-/** Eight triangular rays sitting just outside the disc. */
-const RAYS = Array.from({ length: 8 }, (_, i) => {
-  const a = (i * Math.PI) / 4;
-  const spread = 0.17;
-  const inner = R + 3;
-  const outer = R + 13;
-  const p = (rad: number, ang: number) =>
-    `${(CX + rad * Math.cos(ang)).toFixed(1)} ${(CY + rad * Math.sin(ang)).toFixed(1)}`;
-  return `M${p(inner, a - spread)}L${p(outer, a)}L${p(inner, a + spread)}Z`;
-}).join("");
-
-/** Eight thin spokes radiating from the disc. */
-const SPOKES = Array.from({ length: 8 }, (_, i) => {
-  const a = (i * Math.PI) / 4;
-  const p = (rad: number) =>
-    `${(CX + rad * Math.cos(a)).toFixed(1)} ${(CY + rad * Math.sin(a)).toFixed(1)}`;
-  return `M${p(R + 4)}L${p(R + 12)}`;
-}).join("");
-
-/**
- * Horizontal bands across the disc. Each line is trimmed to the circle's
- * width at that height, so no clip path or generated id is needed.
- */
-const BANDS = [-6, 0, 6, 12]
-  .map((dy) => {
-    const halfWidth = Math.sqrt(Math.max(R * R - dy * dy, 0)) - 1.5;
-    if (halfWidth <= 1) return "";
-    const y = (CY + dy).toFixed(1);
-    return `M${(CX - halfWidth).toFixed(1)} ${y}H${(CX + halfWidth).toFixed(1)}`;
-  })
-  .join("");
-
-/**
- * Coquette sun: a scalloped daisy disc with fine spokes of alternating length
- * and a small dot on every long one.
- */
-const SCALLOP_R = 13;
-const SCALLOP_N = 12;
-
-const SCALLOP = (() => {
-  const step = (Math.PI * 2) / SCALLOP_N;
-  const rr = ((2 * SCALLOP_R * Math.sin(step / 2)) / 2).toFixed(2);
-  const pt = (a: number) =>
-    `${(CX + SCALLOP_R * Math.cos(a)).toFixed(2)} ${(CY + SCALLOP_R * Math.sin(a)).toFixed(2)}`;
-  let d = `M${pt(0)}`;
-  for (let i = 1; i <= SCALLOP_N; i++) d += `A${rr} ${rr} 0 0 1 ${pt(i * step)}`;
-  return d + "Z";
-})();
-
-const FINE_SPOKES = (() => {
-  let d = "";
-  for (let i = 0; i < 12; i++) {
-    const a = (i * Math.PI * 2) / 12;
-    const outer = i % 2 === 0 ? 25 : 20;
-    const p = (r: number) =>
-      `${(CX + r * Math.cos(a)).toFixed(2)} ${(CY + r * Math.sin(a)).toFixed(2)}`;
-    d += `M${p(16)}L${p(outer)}`;
-  }
-  return d;
-})();
-
-const SPOKE_DOTS = Array.from({ length: 6 }, (_, k) => {
-  const a = (k * Math.PI * 2) / 6;
-  return {
-    cx: Number((CX + 27.6 * Math.cos(a)).toFixed(2)),
-    cy: Number((CY + 27.6 * Math.sin(a)).toFixed(2)),
-  };
-});
-
-const stroke = {
-  stroke: "var(--ink)",
-  strokeWidth: 3,
-  strokeLinejoin: "round" as const,
-  strokeLinecap: "round" as const,
-  vectorEffect: "non-scaling-stroke" as const,
-};
-
-/** The sun for sky panels. Decorative. */
-export function Sun({ size = 32, variant = "coquette", animated = false, className = "" }: SunProps) {
+/** The moon. Replaces the sun now the sky is night. Decorative. */
+export function Moon({
+  size = 56,
+  withStar = false,
+  animated = false,
+  className = "",
+}: MoonProps) {
   return (
     <svg
       width={size}
@@ -241,21 +129,20 @@ export function Sun({ size = 32, variant = "coquette", animated = false, classNa
       viewBox="0 0 64 64"
       aria-hidden="true"
       focusable="false"
-      className={`${animated ? "animate-float-slow motion-reduce:animate-none" : ""} ${className}`}
+      className={`${animated ? "animate-glow motion-reduce:animate-none" : ""} ${className}`}
     >
-      {variant === "coquette" ? (
-        <>
-          <path d={FINE_SPOKES} fill="none" {...stroke} strokeWidth={2} />
-          {SPOKE_DOTS.map((d) => (
-            <circle key={`${d.cx}-${d.cy}`} cx={d.cx} cy={d.cy} r={1.9} fill="var(--gold)" {...stroke} strokeWidth={2} />
-          ))}
-          <path d={SCALLOP} fill="var(--gold)" {...stroke} />
-        </>
+      <path d={CRESCENT} fill="var(--gold)" strokeWidth="3.5" {...line} />
+      <circle cx="23" cy="25" r="4.2" fill="var(--crater)" />
+      <circle cx="20" cy="39" r="3" fill="var(--crater)" />
+      <circle cx="30" cy="45" r="3.6" fill="var(--crater)" />
+      {withStar ? (
+        <path
+          d="M50 34c1 7 4.5 10.5 11.5 11.5C54.5 46.5 51 50 50 57c-1-7-4.5-10.5-11.5-11.5C45.5 44.5 49 41 50 34Z"
+          fill="var(--cloud)"
+          strokeWidth="3"
+          {...line}
+        />
       ) : null}
-      {variant === "rayed" ? <path d={RAYS} fill="var(--gold)" {...stroke} /> : null}
-      {variant === "spoked" ? <path d={SPOKES} fill="none" {...stroke} /> : null}
-      {variant === "coquette" ? null : <circle cx={CX} cy={CY} r={R} fill="var(--gold)" {...stroke} />}
-      {variant === "banded" ? <path d={BANDS} fill="none" {...stroke} strokeWidth={2.5} /> : null}
     </svg>
   );
 }

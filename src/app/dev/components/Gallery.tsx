@@ -13,7 +13,7 @@ import {
   RetroWindow,
   SearchBar,
   Sparkle,
-  Sun,
+  Moon,
 } from "@/components";
 import { gallery as g } from "./copy";
 
@@ -94,9 +94,9 @@ export function Gallery() {
             <RetroWindow title={g.windowTitle} variant="plain">
               <p>{g.lorem}</p>
             </RetroWindow>
-            <RetroWindow title={g.windowTitle} variant="browser" fill="accent" flush>
+            <RetroWindow title={g.windowTitle} variant="browser" fill="night" flush>
               <div className="relative h-40 overflow-hidden">
-                <Sun className="absolute top-4 left-6" />
+                <Moon size={44} withStar className="absolute top-4 left-6" />
                 <Cloud size="lg" className="absolute top-6 right-6" />
                 <Cloud size="sm" className="absolute bottom-3 left-10" />
                 <Sparkle tone="cream" className="absolute top-12 left-1/2" />
@@ -181,11 +181,11 @@ export function Gallery() {
           <div className="flex flex-wrap items-center gap-6">
             <Cloud size="sm" />
             <Cloud size="md" />
-            <Cloud size="lg" animated />
-            <Sparkle tone="ink" />
+            <Cloud size="lg" />
+            <Sparkle tone="cream" />
             <Sparkle tone="gold" size={24} animated />
-            <Sparkle tone="cream" size={32} />
-            <Sun />
+            <Sparkle tone="gold" size={32} />
+            <Moon />
           </div>
         </Both>
       </Section>

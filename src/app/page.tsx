@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Button,
-  Cloud,
-  DottedFrame,
-  FolderTab,
-  RetroWindow,
-  Sparkle,
-  Sun,
-} from "@/components";
+import { Button, Cloud, DottedFrame, FolderTab, Moon, RetroWindow, Sparkle } from "@/components";
 import { SectionHeading } from "@/components/site/Page";
 import { JsonLd, serviceSchema } from "@/components/site/JsonLd";
 import { DesktopRail } from "@/components/site/DesktopRail";
@@ -38,40 +30,29 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={serviceSchema()} />
-      {/* Hero. The headline sits in the sky, on a cream panel so text stays
-          ink on cream. Clouds mass into banks at the top and bottom edges,
-          with a few crossing the middle in three parallax layers. Bank sizes
-          are set per breakpoint rather than CSS-scaled, so outline weight
-          stays constant. */}
-      <section className="relative border-b-[3px] border-ink bg-accent">
+      {/* Night sky. Every cloud does the same thing: drift left to right.
+          Clouds without a drift are static, which is also the reduced-motion view. */}
+      <section className="relative border-b-[3px] border-ink bg-night">
         <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-          <Sun size={56} animated className="absolute top-6 left-6 md:top-24 md:left-auto md:right-28" />
+          <Moon size={64} withStar animated className="absolute top-8 right-10 md:top-14 md:right-28" />
 
-          {/* Top bank, flipped so the lobes hang downward. */}
-          <Cloud size="sm" shape="lumpy" flip animated className="absolute -top-8 -left-8 md:hidden" />
-          <Cloud size="md" shape="peaked" flip animated delay={3} className="absolute -top-10 -right-10 md:hidden" />
-          <Cloud size="lg" shape="lumpy" flip animated className="absolute -top-16 -left-12 hidden md:inline-flex" />
-          <Cloud size="md" shape="puff" flip animated delay={2} className="absolute -top-10 left-1/3 hidden md:inline-flex" />
-          <Cloud size="xl" shape="tall" flip animated delay={1} className="absolute -top-24 right-32 hidden lg:inline-flex" />
-          <Cloud size="lg" shape="peaked" flip animated delay={3} className="absolute -top-14 -right-16 hidden md:inline-flex" />
+          {/* Static clouds, anchored at the edges. */}
+          <Cloud size="lg" className="absolute -top-12 -left-10" />
+          <Cloud size="xl" className="absolute -bottom-16 -left-16 hidden md:inline-flex" />
+          <Cloud size="md" className="absolute -bottom-10 -left-8 md:hidden" />
+          <Cloud size="xl" className="absolute -bottom-20 right-0 hidden lg:inline-flex" />
+          <Cloud size="lg" className="absolute -bottom-14 -right-10 md:hidden" />
 
-          {/* Bottom bank, lobes up, cut off by the bottom edge. */}
-          <Cloud size="md" shape="wide" animated delay={1.5} className="absolute -bottom-12 -left-10 md:hidden" />
-          <Cloud size="sm" shape="tall" animated delay={3.5} className="absolute -bottom-8 right-4 md:hidden" />
-          <Cloud size="xl" shape="wide" animated delay={1.5} className="absolute -bottom-20 -left-20 hidden md:inline-flex" />
-          <Cloud size="lg" shape="tall" animated delay={3.5} className="absolute -bottom-16 left-1/3 hidden lg:inline-flex" />
-          <Cloud size="xl" shape="lumpy" animated delay={0.5} className="absolute -bottom-24 right-1/4 hidden md:inline-flex" />
-          <Cloud size="lg" shape="puff" animated delay={2.5} className="absolute -bottom-14 -right-10 hidden md:inline-flex" />
+          {/* Drifting clouds. Far ones small and slow, near ones large and quicker. */}
+          <Cloud size="xs" drift={280} delay={85} className="absolute left-0 top-10" />
+          <Cloud size="sm" drift={240} delay={39} className="absolute left-0 top-28 hidden md:inline-flex" />
+          <Cloud size="md" drift={190} delay={131} className="absolute left-0 bottom-24 hidden lg:inline-flex" />
 
-          {/* Crossing the open sky. Far layer small and slow, near layer big and quick. */}
-          <Cloud size="xs" shape="puff" drift={280} delay={85} className="absolute left-0 top-10" />
-          <Cloud size="sm" shape="lumpy" drift={240} delay={39} className="absolute left-0 top-24 hidden md:inline-flex" />
-          <Cloud size="md" shape="peaked" drift={190} delay={131} className="absolute left-0 bottom-24 hidden lg:inline-flex" animated />
-
-          <Sparkle tone="cream" size={20} className="absolute top-16 right-1/3" animated />
-          <Sparkle tone="cream" size={14} className="absolute top-32 right-16" animated />
-          <Sparkle tone="gold" size={18} className="hidden md:block absolute bottom-24 right-1/4" animated />
-          <Sparkle tone="cream" size={15} className="hidden md:block absolute top-24 left-1/4" animated />
+          <Sparkle tone="cream" size={36} className="absolute top-20 left-1/3" animated />
+          <Sparkle tone="gold" size={26} className="absolute top-40 right-1/3" animated />
+          <Sparkle tone="cream" size={24} className="absolute bottom-28 left-20" animated />
+          <Sparkle tone="cream" size={28} className="hidden md:block absolute top-1/2 right-16" animated />
+          <Sparkle tone="gold" size={20} className="hidden md:block absolute top-24 left-2/3" animated />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 pt-24 pb-14 md:py-24">

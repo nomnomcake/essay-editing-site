@@ -10,7 +10,7 @@ export interface RetroWindowProps {
   /** Text shown inside the fake URL pill. Decorative. */
   url?: string;
   /** Fill colour of the window body. */
-  fill?: "cream" | "accent" | "peach";
+  fill?: "cream" | "accent" | "peach" | "night";
   /** Remove body padding, e.g. for a full-bleed sky panel. */
   flush?: boolean;
   className?: string;
@@ -23,6 +23,7 @@ const fills: Record<NonNullable<RetroWindowProps["fill"]>, string> = {
   cream: "bg-cream",
   accent: "bg-accent",
   peach: "bg-peach-bg",
+  night: "bg-night",
 };
 
 function Glyph({ children }: { children: ReactNode }) {
@@ -59,7 +60,7 @@ export function RetroWindow({
         ) : (
           <span
             aria-hidden="true"
-            className="-mb-[3px] inline-flex items-center gap-2 border-b-0 outline-ink r-tight rounded-b-none bg-peach-bg px-2 py-1.5"
+            className="-mb-[3px] inline-flex items-center gap-2 border-b-0 outline-ink r-tab rounded-b-none bg-peach-bg px-2 py-1.5"
           >
             <span>{title}</span>
             <span className="text-[10px]">{ui.glyph.close}</span>

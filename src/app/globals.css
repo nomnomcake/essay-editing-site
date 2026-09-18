@@ -9,14 +9,22 @@
   --peach-bg: #fbe3d8; /* page background */
   --cream: #fff9f4; /* card fill */
   --ink: #4a2e29; /* every outline, every piece of body text */
-  --accent: #e89a94; /* salmon. sky, primary CTA fill */
+  --accent: #e89a94; /* salmon. primary CTA fill */
   --accent-deep: #d97b77; /* primary hover, inline error text */
   --periwinkle: #b9c6e8; /* secondary buttons, icon fills */
-  --gold: #f2c879; /* stars, sun, highlights */
+  --gold: #f2c879; /* moon, stars, highlights */
+
+  /* Night sky. Separate from --accent so the primary button stays salmon
+     and keeps its contrast; a dark sky as a button fill would not. */
+  --night: #4a3f8c;
+  --cloud: #fff6e9; /* cloud and star fill, warmer than --cream */
+  --sky-line: #8a5a33; /* outline for sky illustrations; ink disappears on night */
+  --crater: #dfae63;
 
   --outline-width: 3px;
-  --radius-soft: 12px;
+  --radius-soft: 18px;
   --radius-tight: 4px;
+  --radius-tab: 12px;
 }
 
 /* Register tokens with Tailwind so bg-cream, border-ink, text-accent etc. work. */
@@ -28,6 +36,8 @@
   --color-accent-deep: var(--accent-deep);
   --color-periwinkle: var(--periwinkle);
   --color-gold: var(--gold);
+  --color-night: var(--night);
+  --color-cloud: var(--cloud);
 
   --font-pixel: var(--font-pixel), "Courier New", monospace;
   --font-body: var(--font-body), system-ui, sans-serif;
@@ -45,6 +55,10 @@
 
 @utility r-soft {
   border-radius: var(--radius-soft);
+}
+
+@utility r-tab {
+  border-radius: var(--radius-tab);
 }
 
 @utility r-tight {
@@ -73,16 +87,6 @@
 /* ---------------------------------------------------------------------------
    Decorative motion. Elements using these are hidden under reduced motion.
    --------------------------------------------------------------------------- */
-@keyframes bob {
-  0%,
-  100% {
-    transform: translateY(0) scale(1, 1);
-  }
-  50% {
-    transform: translateY(-9px) scale(1.03, 0.97);
-  }
-}
-
 @keyframes twinkle {
   0%,
   100% {
@@ -104,7 +108,7 @@
   }
 }
 
-@keyframes pulse-sun {
+@keyframes glow {
   0%,
   100% {
     transform: translateY(0) scale(1);
@@ -114,16 +118,8 @@
   }
 }
 
-@utility animate-bob {
-  animation: bob 16s ease-in-out infinite;
-}
-
-@utility animate-float {
-  animation: bob 16s ease-in-out infinite;
-}
-
-@utility animate-float-slow {
-  animation: pulse-sun 15s ease-in-out infinite;
+@utility animate-glow {
+  animation: glow 15s ease-in-out infinite;
 }
 
 @utility animate-drift {
