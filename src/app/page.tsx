@@ -5,14 +5,7 @@ import { SectionHeading } from "@/components/site/Page";
 import { JsonLd, serviceSchema } from "@/components/site/JsonLd";
 import { DesktopRail } from "@/components/site/DesktopRail";
 import { HomeSearch } from "./HomeSearch";
-import {
-  credentials,
-  faq,
-  packages,
-  pages,
-  process,
-  site,
-} from "@/content";
+import { credentials, faq, packages, pages, process, samples, site, ui } from "@/content";
 import type { FolderTone } from "@/components";
 
 const c = pages.home;
@@ -21,6 +14,8 @@ export const metadata: Metadata = {
   title: { absolute: `${c.meta.title} | ${site.name}` },
   description: c.meta.description,
 };
+
+const sample = samples[0];
 
 const tones: FolderTone[] = ["accent", "periwinkle", "gold", "periwinkle"];
 
@@ -71,105 +66,184 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="mx-auto flex max-w-7xl gap-8 px-4 py-10 md:py-14">
-        <div className="flex min-w-0 flex-1 flex-col gap-14">
-          <HomeSearch />
-
-      {/* Credentials strip */}
-      <section className="flex flex-col gap-4">
-        <SectionHeading>{c.credentials.heading}</SectionHeading>
-        <ul className="flex flex-wrap gap-3">
-          {credentials.map((cr) => (
-            <li
-              key={cr.id}
-              className="flex items-center gap-2 outline-ink r-soft bg-cream px-3 py-2 text-sm"
-            >
-              <Sparkle tone="gold" size={12} />
-              <span>{cr.text}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Process row */}
-      <section className="flex flex-col gap-4">
-        <SectionHeading>{c.process.heading}</SectionHeading>
-        <DottedFrame>
-          <ol className="grid gap-6 md:grid-cols-4">
-            {process.map((step) => (
-              <li key={step.id} className="flex flex-col gap-2">
-                <h3 className="font-pixel text-xs">{step.title}</h3>
-                <p>{step.description}</p>
-                <dl className="mt-1 flex flex-col gap-1 text-sm">
-                  <div className="flex gap-2">
-                    <dt className="font-pixel text-[10px] uppercase pt-0.5 w-8 shrink-0">{c.process.you}</dt>
-                    <dd>{step.you}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="font-pixel text-[10px] uppercase pt-0.5 w-8 shrink-0">{c.process.me}</dt>
-                    <dd>{step.me}</dd>
-                  </div>
-                </dl>
-              </li>
-            ))}
-          </ol>
-        </DottedFrame>
-      </section>
-
-      {/* Packages */}
-      <section className="flex flex-col gap-4">
-        <div className="flex items-baseline justify-between gap-4">
-          <SectionHeading>{c.packages.heading}</SectionHeading>
-          <Link href="/packages" className="focus-retro r-tight font-pixel text-xs underline underline-offset-4">
-            {c.packages.seeAll}
-          </Link>
-        </div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {packages.map((p, i) => (
-            <FolderTab key={p.id} label={p.name.toLowerCase()} tone={tones[i % tones.length]} featured={p.featured}>
-              <div className="flex h-full flex-col gap-3">
-                <p className="text-sm">{p.summary}</p>
-                <ul className="flex flex-col gap-1 font-pixel text-[11px]">
-                  <li>
-                    {p.essayCount} {c.packages.essays}
-                  </li>
-                  <li>
-                    {p.turnaroundDays} {c.packages.turnaround}
-                  </li>
-                  <li>
-                    {p.revisionRounds} {c.packages.rounds}
-                  </li>
+      <div className="mx-auto flex max-w-7xl gap-10 px-4 py-12 md:py-16">
+        <div className="flex min-w-0 flex-1 flex-col gap-16">
+          {/* 1. What an edit is. The first thing after the hero answers
+              "is this for me", before any credentials or pricing. */}
+          <section className="flex flex-col gap-5">
+            <div className="flex items-baseline justify-between gap-4">
+              <SectionHeading>{c.offer.heading}</SectionHeading>
+              <Link href="/services" className="focus-retro r-tight font-pixel text-xs underline underline-offset-4">
+                {c.offer.seeAll}
+              </Link>
+            </div>
+            <div className="grid gap-5 md:grid-cols-2">
+              <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-5">
+                <h3 className="font-pixel text-xs">{c.offer.includes}</h3>
+                <ul className="flex flex-col gap-2">
+                  {pages.services.includes.items.slice(0, 3).map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <Sparkle tone="gold" size={14} className="mt-1 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
-                <p className="mt-auto text-2xl font-bold">{p.price}</p>
-                <Button as="link" href={`/packages#${p.id}`} variant="ghost" size="sm">
-                  {c.packages.seeAll}
-                </Button>
               </div>
-            </FolderTab>
-          ))}
-        </div>
-      </section>
+              <div className="flex flex-col gap-3 outline-ink r-soft bg-cream p-5">
+                <h3 className="font-pixel text-xs">{c.offer.excludes}</h3>
+                <ul className="flex flex-col gap-2">
+                  {pages.services.excludes.items.slice(0, 3).map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span aria-hidden="true" className="mt-0.5 font-pixel text-xs">
+                        {ui.glyph.close}
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
 
-      {/* FAQ preview */}
-      <section id={c.faqPreview.anchor} className="flex flex-col gap-4 scroll-mt-24">
-        <div className="flex items-baseline justify-between gap-4">
-          <SectionHeading>{c.faqPreview.heading}</SectionHeading>
-          <Link href="/faq" className="focus-retro r-tight font-pixel text-xs underline underline-offset-4">
-            {c.faqPreview.seeAll}
-          </Link>
-        </div>
-        <RetroWindow title={c.faqPreview.anchor} variant="plain">
-          <ul className="flex flex-col divide-y-2 divide-ink/20">
-            {faq.slice(0, 4).map((q) => (
-              <li key={q.id} className="py-3 first:pt-0 last:pb-0">
-                <Link href={`/faq#${q.id}`} className="focus-retro r-tight font-semibold underline decoration-2 underline-offset-2">
-                  {q.question}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </RetroWindow>
-      </section>
+          {/* 2. How it works */}
+          <section className="flex flex-col gap-5">
+            <SectionHeading>{c.process.heading}</SectionHeading>
+            <DottedFrame>
+              <ol className="grid gap-6 md:grid-cols-4">
+                {process.map((step) => (
+                  <li key={step.id} className="flex flex-col gap-2">
+                    <h3 className="font-pixel text-xs">{step.title}</h3>
+                    <p>{step.description}</p>
+                    <dl className="mt-1 flex flex-col gap-1 text-sm">
+                      <div className="flex gap-2">
+                        <dt className="w-8 shrink-0 pt-0.5 font-pixel text-[10px] uppercase">{c.process.you}</dt>
+                        <dd>{step.you}</dd>
+                      </div>
+                      <div className="flex gap-2">
+                        <dt className="w-8 shrink-0 pt-0.5 font-pixel text-[10px] uppercase">{c.process.me}</dt>
+                        <dd>{step.me}</dd>
+                      </div>
+                    </dl>
+                  </li>
+                ))}
+              </ol>
+            </DottedFrame>
+          </section>
+
+          {/* 3. Who is editing. Trust, once they know what the service is. */}
+          <section className="flex flex-col gap-5">
+            <div className="flex items-baseline justify-between gap-4">
+              <SectionHeading>{c.credentials.heading}</SectionHeading>
+              <Link href="/about" className="focus-retro r-tight font-pixel text-xs underline underline-offset-4">
+                {c.credentials.seeAll}
+              </Link>
+            </div>
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {credentials.map((cr) => (
+                <li key={cr.id} className="flex items-start gap-2 outline-ink r-soft bg-cream px-4 py-3 text-sm">
+                  <Sparkle tone="gold" size={13} className="mt-1 shrink-0" />
+                  <span>{cr.text}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* 4. Packages */}
+          <section className="flex flex-col gap-5">
+            <div className="flex items-baseline justify-between gap-4">
+              <SectionHeading>{c.packages.heading}</SectionHeading>
+              <Link href="/packages" className="focus-retro r-tight font-pixel text-xs underline underline-offset-4">
+                {c.packages.seeAll}
+              </Link>
+            </div>
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {packages.map((p, i) => (
+                <FolderTab key={p.id} label={p.name.toLowerCase()} tone={tones[i % tones.length]} featured={p.featured}>
+                  <div className="flex h-full flex-col gap-3">
+                    <p className="text-sm">{p.summary}</p>
+                    <ul className="flex flex-col gap-1 font-pixel text-[11px]">
+                      <li>
+                        {p.essayCount} {c.packages.essays}
+                      </li>
+                      <li>
+                        {p.turnaroundDays} {c.packages.turnaround}
+                      </li>
+                      <li>
+                        {p.revisionRounds} {c.packages.rounds}
+                      </li>
+                    </ul>
+                    <p className="mt-auto text-2xl font-bold">{p.price}</p>
+                  </div>
+                </FolderTab>
+              ))}
+            </div>
+          </section>
+
+          {/* 5. Proof. One excerpt, so the editing is visible without leaving home. */}
+          <section className="flex flex-col gap-5">
+            <div className="flex items-baseline justify-between gap-4">
+              <SectionHeading>{c.proof.heading}</SectionHeading>
+              <Link href="/samples" className="focus-retro r-tight font-pixel text-xs underline underline-offset-4">
+                {c.proof.seeAll}
+              </Link>
+            </div>
+            <RetroWindow title={sample.school.toLowerCase()} variant="plain">
+              <div className="flex flex-col gap-4">
+                <p className="font-pixel text-[11px]">
+                  {sample.prompt} {ui.glyph.dot} {sample.wordLimit} {pages.samples.wordLimit}
+                </p>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-pixel text-[11px] uppercase">{c.proof.before}</h3>
+                    <p className="outline-ink r-tight bg-peach-bg p-4 text-sm">{sample.before}</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-pixel text-[11px] uppercase">{c.proof.after}</h3>
+                    <p className="outline-ink r-tight bg-cream p-4 text-sm">{sample.after}</p>
+                  </div>
+                </div>
+              </div>
+            </RetroWindow>
+          </section>
+
+          {/* 6. Questions. The search belongs here, where the visitor has them. */}
+          <section id={c.faqPreview.anchor} className="flex scroll-mt-24 flex-col gap-5">
+            <div className="flex items-baseline justify-between gap-4">
+              <SectionHeading>{c.faqPreview.heading}</SectionHeading>
+              <Link href="/faq" className="focus-retro r-tight font-pixel text-xs underline underline-offset-4">
+                {c.faqPreview.seeAll}
+              </Link>
+            </div>
+            <HomeSearch />
+            <ul className="flex flex-col divide-y-2 divide-ink/20 outline-ink r-soft bg-cream px-5">
+              {faq.slice(0, 5).map((q) => (
+                <li key={q.id} className="py-3">
+                  <Link
+                    href={`/faq#${q.id}`}
+                    className="focus-retro r-tight font-semibold underline decoration-2 underline-offset-2"
+                  >
+                    {q.question}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* 7. One closing call to action, and only one. */}
+          <section className="flex flex-col items-start gap-4 outline-ink r-soft bg-cream p-6 md:flex-row md:items-center md:justify-between md:p-8">
+            <div className="flex flex-col gap-2">
+              <SectionHeading>{c.closing.heading}</SectionHeading>
+              <p className="max-w-prose">{c.closing.body}</p>
+            </div>
+            <div className="flex shrink-0 flex-wrap gap-3">
+              <Button as="link" href={site.cta.href} size="lg">
+                {c.closing.primary}
+              </Button>
+              <Button as="link" href={site.book.href} variant="ghost" size="lg">
+                {c.closing.secondary}
+              </Button>
+            </div>
+          </section>
         </div>
         <DesktopRail />
       </div>

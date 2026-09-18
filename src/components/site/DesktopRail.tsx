@@ -1,42 +1,42 @@
 import Link from "next/link";
-import { Cloud } from "@/components/Decorations";
-import { DocIcon } from "@/components/DocIcon";
 import { DottedFrame } from "@/components/DottedFrame";
-import { HeartRow } from "@/components/HeartRow";
-import { CloseBadge, EnvelopeIcon, FolderIcon, GlobeIcon, StarIcon } from "@/components/Icons";
+import { CloseBadge, EnvelopeIcon, GlobeIcon, StarIcon } from "@/components/Icons";
+import { DocIcon } from "@/components/DocIcon";
 import { pages, site } from "@/content";
 
 const c = pages.desktop;
 
 const iconLink =
-  "focus-retro group flex w-20 flex-col items-center gap-1 r-tight p-1 text-center font-pixel text-[10px] leading-tight hover:bg-cream/70";
+  "focus-retro flex w-24 flex-col items-center gap-1.5 r-tight p-2 text-center font-pixel text-[10px] leading-tight hover:bg-cream/70";
 
-/** The column of desktop icons from the reference. Every icon is a real link; the glyphs are decorative. */
+/**
+ * Desktop objects beside the page, on the home page only.
+ *
+ * Deliberately does NOT repeat the title-bar tabs. Everything here is either an
+ * action (start, book, email) or a document, so the rail never competes with
+ * the navigation as a second, parallel menu.
+ */
 export function DesktopRail() {
   return (
-    <aside aria-label={c.rail} className="hidden lg:flex lg:w-52 lg:shrink-0 lg:flex-col lg:items-center lg:gap-6">
-      <HeartRow filled={5} />
+    <aside aria-label={c.rail} className="hidden w-28 shrink-0 flex-col items-center gap-7 lg:flex">
+      <Link href={site.cta.href} className={iconLink}>
+        <StarIcon size={52} />
+        <span>{c.star}</span>
+      </Link>
 
-      <div className="mt-2 grid grid-cols-2 gap-x-2 gap-y-4">
-        <Link href={site.book.href} className={iconLink}>
-          <GlobeIcon size={52} />
-          <span>{c.globe}</span>
-        </Link>
-        {site.nav.map((item) => (
-          <Link key={item.href} href={item.href} className={iconLink}>
-            <FolderIcon size={52} />
-            <span>{item.label}</span>
-          </Link>
-        ))}
-        <a href={`mailto:${site.contactEmail}`} className={iconLink}>
-          <EnvelopeIcon size={52} />
-          <span>{c.mail}</span>
-        </a>
-      </div>
+      <Link href={site.book.href} className={iconLink}>
+        <GlobeIcon size={48} />
+        <span>{c.globe}</span>
+      </Link>
+
+      <a href={`mailto:${site.contactEmail}`} className={iconLink}>
+        <EnvelopeIcon size={48} />
+        <span>{c.mail}</span>
+      </a>
 
       <DottedFrame padding="sm" className="relative bg-cream/40">
-        <CloseBadge className="absolute -top-3 -right-3" />
-        <div className="flex gap-3">
+        <CloseBadge className="absolute -top-3 -left-3" />
+        <div className="flex flex-col gap-3">
           <Link href="/samples" className={`${iconLink} w-auto`}>
             <DocIcon label={c.docs.samples} size="sm" tone="periwinkle" />
           </Link>
@@ -45,13 +45,6 @@ export function DesktopRail() {
           </Link>
         </div>
       </DottedFrame>
-
-      <Link href={site.cta.href} className={iconLink}>
-        <StarIcon size={56} />
-        <span>{c.star}</span>
-      </Link>
-
-      <Cloud size="md" className="block" />
     </aside>
   );
 }

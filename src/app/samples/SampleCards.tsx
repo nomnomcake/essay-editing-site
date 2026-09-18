@@ -15,7 +15,7 @@ export function SampleCards({ samples }: { samples: Sample[] }) {
 
   return (
     <div className="flex flex-col gap-8">
-      <ul className="flex flex-wrap gap-6">
+      <ul className="flex flex-wrap gap-2">
         {samples.map((s) => {
           const isOpen = s.id === openId;
           const panelId = `${baseId}-${s.id}`;
@@ -26,17 +26,15 @@ export function SampleCards({ samples }: { samples: Sample[] }) {
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenId(isOpen ? null : s.id)}
-                className={`focus-retro flex flex-col items-center gap-1 r-soft p-3 transition-colors motion-reduce:transition-none hover:bg-cream ${isOpen ? "bg-cream outline-ink" : ""}`}
+                className={`focus-retro flex items-center gap-2 outline-ink r-tight px-3 py-2 font-pixel text-[11px] ${
+                  isOpen ? "bg-peach-bg" : "bg-cream hover:bg-peach-bg/60"
+                }`}
               >
-                <DocIcon label={s.school.toLowerCase()} size="lg" tone={isOpen ? "periwinkle" : "cream"} />
-                <span className="font-pixel text-[10px]">
+                <DocIcon label="" size="sm" tone={isOpen ? "periwinkle" : "cream"} className="w-5" />
+                <span>{s.school.toLowerCase()}</span>
+                <span>
                   {s.wordLimit} {c.wordLimit}
                 </span>
-                {s.placeholder ? (
-                  <span className="r-tight bg-gold px-1.5 py-0.5 font-pixel text-[9px] uppercase">
-                    {c.placeholderTag}
-                  </span>
-                ) : null}
               </button>
             </li>
           );
@@ -49,11 +47,12 @@ export function SampleCards({ samples }: { samples: Sample[] }) {
         return (
           <section key={s.id} id={panelId} hidden={!isOpen} aria-label={s.prompt}>
             {isOpen ? (
-              <RetroWindow title={s.school.toLowerCase()} variant="browser">
+              <RetroWindow title={s.school.toLowerCase()} variant="plain">
                 <div className="flex flex-col gap-6">
-                  <p className="font-pixel text-xs">
+                  {/* An h2 here so the before/after h3s do not jump straight from the page h1. */}
+                  <h2 className="font-pixel text-xs">
                     {s.prompt} {ui.glyph.dot} {s.wordLimit} {c.wordLimit}
-                  </p>
+                  </h2>
                   <div className="grid gap-6 md:grid-cols-2">
                     <div className="flex flex-col gap-2">
                       <h3 className="font-pixel text-[11px] uppercase">{c.before}</h3>

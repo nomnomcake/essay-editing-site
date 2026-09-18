@@ -14,7 +14,25 @@ export const pages = {
     subcopy:
       "Supplements first, personal statement second. You write. I mark it up. Nothing is written for you.",
     dialog: { prompt: "do you want to continue?" },
-    credentials: { heading: "who is editing" },
+    credentials: { heading: "who is editing", seeAll: "more about the editor" },
+    offer: {
+      heading: "what an edit is",
+      includes: "what you get",
+      excludes: "what it is not",
+      seeAll: "the full scope",
+    },
+    proof: {
+      heading: "what an edit looks like",
+      before: "before",
+      after: "after",
+      seeAll: "see both samples",
+    },
+    closing: {
+      heading: "ready when you are",
+      body: "Submit the intake form and I will reply within one business day with a yes or no and a price.",
+      primary: "start intake",
+      secondary: "book a call first",
+    },
     process: { heading: "how it works", you: "you", me: "me" },
     packages: {
       heading: "packages",
@@ -70,18 +88,9 @@ export const pages = {
       body:
         "Turnaround counts from when I confirm I have your draft and payment. It is a maximum, not an estimate. Rush pricing applies when your first deadline is under 72 hours away.",
     },
-    table: {
-      windowTitle: "compare.xls",
-      heading: "compare packages",
-      columns: {
-        package: "package",
-        essays: "essays",
-        words: "word cap",
-        days: "turnaround",
-        rounds: "rounds",
-        price: "price",
-      },
-      daysUnit: "days",
+    next: {
+      heading: "what it costs",
+      body: "Four fixed packages, priced by how many essays you need and how many rounds you want. The comparison table is on the packages page.",
     },
     cta: "see prices and buy",
   },
@@ -94,6 +103,20 @@ export const pages = {
     heading: "packages",
     intro:
       "Prices are fixed. Submit the intake form first so I can confirm I have room, then pay through the link.",
+    compareHeading: "compare",
+    table: {
+      windowTitle: "compare.xls",
+      columns: {
+        package: "package",
+        essays: "essays",
+        words: "word cap",
+        days: "turnaround",
+        rounds: "rounds",
+        price: "price",
+      },
+      daysUnit: "days",
+    },
+    detailHeading: "what each one includes",
     includes: "includes",
     excludes: "does not include",
     buy: "pay with stripe",
